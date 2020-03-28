@@ -2,6 +2,21 @@
 //Importamos Express
 const express = require('express');
 const helmet = require('helmet');
+const bcrypt = require('bcrypt');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const expressValidator = require('express-validator');
+const jsonWebToken = require('jsonwebtoken');
+const cors = require('cors');
+const mongoose = require('mongoose');
+const mongooseAutopopulate = require('mongoose-autopopulate');
+
+
+
+
+
+
+
 
 
 
@@ -9,7 +24,7 @@ const helmet = require('helmet');
 //Creamos servidor
 const server = express();
 
-//
+//Midelwares
 server.use(helmet());
 
 //Creamos servidor estático
