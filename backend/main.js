@@ -28,11 +28,11 @@ const server = express();
 server.use(helmet());
 
 //Creamos servidor estático
-server.use(express.static('static))
+server.use(express.static('static'))
 
 //Llamadas
 server.get("/", (req, res) => {
-    res.send("Hola Mundo");
+    res.send("Felicidades. El servidor está funcionando. De momento no peta. ¡Muy bien!");
 });
 
 
