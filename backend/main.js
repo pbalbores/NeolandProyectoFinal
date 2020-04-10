@@ -8,16 +8,7 @@ const cookieParser = require('cookie-parser');
 const expressValidator = require('express-validator');
 const jsonWebToken = require('jsonwebtoken');
 const cors = require('cors');
-const mongoose = require('mongoose');
-const mongooseAutopopulate = require('mongoose-autopopulate');
-
-
-
-
-
-
-
-
+const mysql = require('mysql');
 
 
 
@@ -34,7 +25,6 @@ server.use(express.static('static'))
 server.get("/", (req, res) => {
     res.send("Felicidades. El servidor está funcionando. De momento no peta. ¡Muy bien!");
 });
-
 
 
 //Definimos puerto de servidor
