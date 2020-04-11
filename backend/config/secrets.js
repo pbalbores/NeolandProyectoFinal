@@ -1,9 +1,10 @@
 //Configuramos acceso a base de datos
-const mysql = require('mysql');
-const connection = mysql.createPool({
+
+module.exports = {
     host: 'hl765.dinaserver.com',
     user: 'desarrollo00',
     password: 'desarrollo',
-    database: 'quefacernacosta'
-});
-module.exports = connection;
+    database: 'quefacernacosta',
+    connectTimeout: 50000,
+    acquireTimeout: 50000
+}
