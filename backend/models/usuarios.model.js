@@ -1,9 +1,13 @@
+//*
+//*
+//*SE COMUNICA CON LA TABLA USUARIOS DE LA BASE DE DATOS
+//*
+
 const connection = require('./db.model');
 
-//CRUD OBRE TABLA USUARIOS
+//CRUD SOBRE TABLA USUARIOS
 
 //INSERT == CREATE NEW USER
-
 
 exports.crearUsuario = (nombreUsuario, password, email, admin) => {
     return new Promise(async (resolve, reject) => {
@@ -21,3 +25,17 @@ exports.crearUsuario = (nombreUsuario, password, email, admin) => {
     })
 }
 
+//GET OBTENER TODOS LOS USUARIOS
+
+exports.obtenerTodosUsuarios = () => {
+
+    return new Promise(async (resolve, reject) => {
+        try {
+            const todosUsuarios = await connection.query("SELECT * FROM usuarios")
+            resolve(todosUsuarios);
+        } catch (error) {
+            resolve(error);
+        }
+    })
+
+}

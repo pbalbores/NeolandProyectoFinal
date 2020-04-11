@@ -1,5 +1,5 @@
-//Inicamos proyecto.
-//Importamos Express
+
+//Importaciones
 const express = require('express');
 const helmet = require('helmet');
 const bcrypt = require('bcrypt');
@@ -10,7 +10,7 @@ const jsonWebToken = require('jsonwebtoken');
 const cors = require('cors');
 const mysql = require('mysql');
 //const users_controller = require('./controllers/users_controller');
-const mainController = require('./controllers/main.controller');
+const usersController = require('./controllers/usuarios.controller');
 
 
 //Creamos servidor
@@ -31,8 +31,9 @@ server.get("/", (req, res) => {
     res.send("Felicidades. El servidor está funcionando. De momento no peta. ¡Muy bien!");
 });
 //USUARIOS.POST==NEW USUARIO
-server.post('/novoUsuario', mainController.nuevoUsuario)
-
+server.post('/novoUsuario', usersController.nuevoUsuario)
+//USUARIOS.GET ==DEVUELVE TODOS LOS USUARIOS
+server.get('/allusers', usersController.listaUsuarios)
 
 
 //Definimos puerto de servidor

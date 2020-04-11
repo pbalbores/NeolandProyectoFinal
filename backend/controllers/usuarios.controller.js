@@ -1,5 +1,8 @@
 const usuariosModel = require('../models/usuarios.model');
 
+
+//CREAR NUEVO USUARIO
+
 exports.nuevoUsuario = async (req, res) => {
 
     const nombre = req.body.nombreUsuario;
@@ -21,4 +24,18 @@ exports.nuevoUsuario = async (req, res) => {
     }
 
 
+}
+
+//OBTENER TODOS LOS USUARIOS
+exports.listaUsuarios = async (req, res) => {
+    try {
+        const resultados = await usuariosModel.obtenerTodosUsuarios();
+        //console.log(resultados);
+        res.send(resultados)
+
+    } catch (error) {
+        console.log(error);
+        res.send(error)
+
+    }
 }
