@@ -7,7 +7,7 @@ const connection = require('./db.model');
 
 //CRUD SOBRE TABLA USUARIOS
 
-//INSERT == CREATE NEW USER
+//1. INSERT == CREATE NEW USER
 
 exports.crearUsuario = (nombreUsuario, password, email, admin) => {
     return new Promise(async (resolve, reject) => {
@@ -25,7 +25,7 @@ exports.crearUsuario = (nombreUsuario, password, email, admin) => {
     })
 }
 
-//GET OBTENER TODOS LOS USUARIOS
+//2. GET OBTENER TODOS LOS USUARIOS
 
 exports.obtenerTodosUsuarios = () => {
 
@@ -34,8 +34,21 @@ exports.obtenerTodosUsuarios = () => {
             const todosUsuarios = await connection.query("SELECT * FROM usuarios")
             resolve(todosUsuarios);
         } catch (error) {
-            resolve(error);
+            reject(error);
         }
     })
 
+}
+
+//3. OBTENER DATOS DE UN USUARIO UTILIZANDO EL NOMBRE DE USUARIO
+exports.getUserByName = (userName) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const userData = await connection.query(`SELECT * FROM usuarios WHERE nombreUsuario= "${userName}"`)
+            resolve(userData)
+        } catch (error) {
+            console.log(error)
+            reject.send(error)
+        }
+    })
 }

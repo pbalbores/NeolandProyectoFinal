@@ -27,13 +27,17 @@ server.use(bodyParser.urlencoded({
 server.use(express.static('static'))
 
 //ENDPOINTS
-server.get("/", (req, res) => {
+
+/*server.get("/", (req, res) => {
     res.send("Felicidades. El servidor está funcionando. De momento no peta. ¡Muy bien!");
-});
-//USUARIOS.POST==NEW USUARIO
+});*/
+
+//1. USUARIOS.POST ==NUEVO USUARIO
 server.post('/novoUsuario', usersController.nuevoUsuario)
-//USUARIOS.GET ==DEVUELVE TODOS LOS USUARIOS
+//2. USUARIOS.GET ==DEVUELVE TODOS LOS USUARIOS
 server.get('/allusers', usersController.listaUsuarios)
+//3. USUARIOS.GET ==DEVUELVE UN SOLO USUARIO
+server.get('/user/:nombreUsuario', usersController.getUsuarioByName)
 
 
 //Definimos puerto de servidor
