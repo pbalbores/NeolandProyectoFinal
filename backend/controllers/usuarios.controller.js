@@ -7,12 +7,11 @@ const { validationResult } = require('express-validator');
 exports.nuevoUsuario = async (req, res) => {
 
     //LLAMAMOS AL MODELO PARA CREAR UN NUEVO USUARIO
-    //ValidationResult no funciona correctamente. Lo desactivo asignándole a la variable errors el valor false y haciendo que "if (errors==false) se permita la creación del usuario"
+
     try {
-        const errors = false
-        //validationResult(req);
+        const errors = validationResult(req);
         console.log(errors)
-        if (errors == false) {
+        if (errors.isEmpty()) {
 
             //SACAMOS DEL BODY LA INFORMACIÓN
             const nombre = req.body.nombreUsuario;
