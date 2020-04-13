@@ -12,7 +12,7 @@ const cors = require('cors');
 const mysql = require('mysql');
 //const users_controller = require('./controllers/users_controller');
 const usersController = require('./controllers/usuarios.controller');
-
+const eventosController = require('./controllers/eventos.controller');
 
 //Creamos servidor
 const server = express();
@@ -26,13 +26,19 @@ server.use(bodyParser.json());
 
 //Creamos servidor estático
 server.use(express.static('static'))
+//******************************************************************************************************** 
 
 //ENDPOINTS
 
 /*server.get("/", (req, res) => {
     res.send("Felicidades. El servidor está funcionando. De momento no peta. ¡Muy bien!");
-});*/
+}); 
+====ESTE ENDPOINT ESTÁ COMENTADO PORQUE EN ESA DIRECCIÓN VA EL SERVIDOR ESTÁTICO
+*/
 
+///TABLA USUARIOS
+
+//FALTA PARSEAR CONTRASEÑAS
 //1. USUARIOS.POST ==NUEVO USUARIO--POST
 server.post('/novoUsuario', [
     check('nombreUsuario').isString().escape().trim(),
@@ -57,6 +63,23 @@ server.put('/modificarUsuario', [
 
 //5. USUARIOS DELETE ==BORRA UN USUARIO
 server.delete('/deleteuser/:nombreUsuario', usersController.borrarUsuario);
+
+
+//TABLA EVENTOS
+
+//1.EVENTOS.POST ==CREAR NUEVO EVENTO
+
+//2.EVENTOS.GET ==DEVUELVE TODOS LOS EVENTOS
+
+//3.EVENTOS.GET ==DEVUELVE UN EVENTO
+server.get('/eventos/:id', eventosController.eventById)
+//4.EVENTOS.PUT ==CAMBIA LOS DATOS DE UN EVENTO
+
+//5. EVENTOS.DELETE ==BORRA UN EVENTO
+
+
+//************************************************************************************************************** 
+
 
 //Definimos puerto de servidor
 const PORT = process.env.PORT
