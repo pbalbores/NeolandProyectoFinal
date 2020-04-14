@@ -57,7 +57,7 @@ server.get('/user/:nombreUsuario', usersController.getUsuarioByName)
 server.put('/modificarUsuario', [
     check('nombreUsuario').isString().escape().trim(),
     check('password').isString().escape().trim(),
-    check('email').isString().escape().trim(),
+    check('email').isEmail().escape().trim(),
     check('admin').isNumeric().escape().trim()]
     , usersController.modificarUsuario)
 
@@ -68,6 +68,20 @@ server.delete('/deleteuser/:nombreUsuario', usersController.borrarUsuario);
 //TABLA EVENTOS
 
 //1.EVENTOS.POST ==CREAR NUEVO EVENTO
+server.post('/novoEvento', [
+    check('nombreEvento').isString().escape().trim(),
+    check('location1').isString().escape().trim(),
+    check('fk_concellos').isNumeric().escape().trim(),
+    check('localizacion2').isString().escape().trim(),
+    check('fecha').isString().escape().trim(),
+    check('hora').isString().escape().trim(),
+    check('artista').isString().escape().trim(),
+    check('descripcion').isString().escape().trim(),
+    check('prezo').isString().escape().trim(),
+    check('imagen').isString().escape().trim(),
+    check('clasificacion').isNumeric().escape().trim()
+], eventosController.crearEvento);
+
 
 //2.EVENTOS.GET ==DEVUELVE TODOS LOS EVENTOS
 

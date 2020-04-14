@@ -2,22 +2,26 @@ const connection = require('./db.model');
 
 //1.EVENTOS.POST ==CREAR NUEVO EVENTO
 
-//2.EVENTOS.GET ==DEVUELVE TODOS LOS EVENTOS
-
-//3.EVENTOS.GET ==DEVUELVE UN EVENTO
-
-
-exports.getUserByName = (userName) => {
+exports.crearEvento = (nombreEvento, location1, fk_concellos, localizacion2, fecha, hora, artista, descripcion, prezo, imagen, fk_clasificacion, fk_usuario, publicacion) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const userData = await connection.query(`SELECT * FROM usuarios WHERE nombreUsuario= "${userName}"`)
-            resolve(userData)
+            const result = await connection.query(
+                ` INSERT INTO eventos(nombreEvento, location1, fk_concellos, localizacion2,fecha,hora,artista,descripcion,prezo,imagen,fk_clasificacion,fk_usuario,publicacion)
+                VALUES("${nombreEvento}", "${location1}", ${fk_concellos}, "${localizacion2}", "${fecha}", ${hora}, "${artista}", "${descripcion}", ${prezo}, ${imagen}, ${fk_clasificacion}, ${fk_usuario}, ${publicacion})`
+            )
+            resolve(result)
         } catch (error) {
-            console.log(error)
-            reject.send(error)
+            console.log(error);
+            reject(error);
+
         }
     })
 }
+
+
+//2.EVENTOS.GET ==DEVUELVE TODOS LOS EVENTOS
+
+//3.EVENTOS.GET ==DEVUELVE UN EVENTO
 
 exports.getEventById = (id) => {
     return new Promise(async (resolve, reject) => {
