@@ -72,6 +72,19 @@ exports.crearEvento = async (req, res) => {
 
 //2.EVENTOS.GET ==DEVUELVE TODOS LOS EVENTOS
 
+exports.listaEventos = async (req, res) => {
+    try {
+        const resultados = await eventosModel.obtenerTodosEventos();
+        //console.log(resultados);
+        res.send(resultados)
+
+    } catch (error) {
+        console.log(error);
+        res.send(error)
+
+    }
+}
+
 //3.EVENTOS.GET ==DEVUELVE UN EVENTO
 exports.eventById = async (req, res) => {
     try {

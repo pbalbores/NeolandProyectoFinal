@@ -21,6 +21,18 @@ exports.crearEvento = (nombreEvento, location1, fk_concellos, localizacion2, fec
 
 //2.EVENTOS.GET ==DEVUELVE TODOS LOS EVENTOS
 
+exports.obtenerTodosEventos = () => {
+
+    return new Promise(async (resolve, reject) => {
+        try {
+            const todosEventos = await connection.query("SELECT * FROM eventos")
+            resolve(todosEventos);
+        } catch (error) {
+            reject(error);
+        }
+    })
+
+}
 //3.EVENTOS.GET ==DEVUELVE UN EVENTO
 
 exports.getEventById = (id) => {

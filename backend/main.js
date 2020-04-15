@@ -85,7 +85,7 @@ server.post('/novoEvento', [
 
 
 //2.EVENTOS.GET ==DEVUELVE TODOS LOS EVENTOS
-
+server.get('/allEventos', eventosController.listaEventos)
 //3.EVENTOS.GET ==DEVUELVE UN EVENTO
 server.get('/eventos/:id', eventosController.eventById)
 //4.EVENTOS.PUT ==CAMBIA LOS DATOS DE UN EVENTO
