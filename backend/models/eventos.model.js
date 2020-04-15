@@ -37,3 +37,15 @@ exports.getEventById = (id) => {
 //4.EVENTOS.PUT ==CAMBIA LOS DATOS DE UN EVENTO
 
 //5. EVENTOS.DELETE ==BORRA UN EVENTO
+exports.borrarEvento = (idEvento) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const sql = `DELETE FROM eventos WHERE id="${idEvento}"`;
+            const result = await connection.query(sql);
+            resolve(result)
+        } catch (error) {
+            console.log(error)
+            reject(error)
+        }
+    })
+}

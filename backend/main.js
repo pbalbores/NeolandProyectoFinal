@@ -69,18 +69,19 @@ server.delete('/deleteuser/:nombreUsuario', usersController.borrarUsuario);
 
 //1.EVENTOS.POST ==CREAR NUEVO EVENTO
 server.post('/novoEvento', [
-    check('nombreEvento').isString().escape().trim(),
-    check('location1').isString().escape().trim(),
-    check('fk_concellos').isNumeric().escape().trim(),
-    check('localizacion2').isString().escape().trim(),
-    check('fecha').isString().escape().trim(),
-    check('hora').isString().escape().trim(),
-    check('artista').isString().escape().trim(),
-    check('descripcion').isString().escape().trim(),
-    check('prezo').isString().escape().trim(),
-    check('imagen').isString().escape().trim(),
-    check('clasificacion').isNumeric().escape().trim()
+    check('nombreEvento').trim().notEmpty(),
+    check('location1').trim(),
+    check('fk_concellos').trim().notEmpty(),
+    check('localizacion2').trim(),
+    check('fecha').trim().notEmpty(),
+    check('hora').trim(),
+    check('artista').trim().notEmpty(),
+    check('descripcion').trim(),
+    check('prezo').trim(),
+    check('imagen').trim(),
+    check('clasificacion').notEmpty()
 ], eventosController.crearEvento);
+
 
 
 //2.EVENTOS.GET ==DEVUELVE TODOS LOS EVENTOS
@@ -90,7 +91,7 @@ server.get('/eventos/:id', eventosController.eventById)
 //4.EVENTOS.PUT ==CAMBIA LOS DATOS DE UN EVENTO
 
 //5. EVENTOS.DELETE ==BORRA UN EVENTO
-
+server.delete('/deleteEvento/:idEvento', eventosController.borrarEvento);
 
 //************************************************************************************************************** 
 
