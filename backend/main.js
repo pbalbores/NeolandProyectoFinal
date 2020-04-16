@@ -88,7 +88,11 @@ server.post('/novoEvento', [
 server.get('/allEventos', eventosController.listaEventos)
 //3.EVENTOS.GET ==DEVUELVE UN EVENTO
 server.get('/eventos/:id', eventosController.eventById)
+
 //4.EVENTOS.PUT ==CAMBIA LOS DATOS DE UN EVENTO
+//Sin implementar la valñidación del Body
+server.put('/modificarEvento', eventosController.modificarEvento)
+
 
 //5. EVENTOS.DELETE ==BORRA UN EVENTO
 server.delete('/deleteEvento/:idEvento', eventosController.borrarEvento);

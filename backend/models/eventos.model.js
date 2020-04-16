@@ -48,6 +48,39 @@ exports.getEventById = (id) => {
 }
 //4.EVENTOS.PUT ==CAMBIA LOS DATOS DE UN EVENTO
 
+exports.modificarEvento = (id, nuevoNombreEvento, nuevoLocation1, nuevoFkConcellos, nuevoLocalizacion2, nuevoFechaIn, nuevoFechaFin, nuevoHora, nuevoArtista, nuevoDescripcion, nuevoPrezo, nuevoImagen, nuevoFkClasificacion, nuevoFkUsuario, nuevoPublicacion) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const sql = `
+            UPDATE eventos SET
+            nombreEvento ="${nuevoNombreEvento}", 
+            location1 ="${nuevoLocation1}", 
+            fk_concellos ="${nuevoFkConcellos}",  
+            localizacion2  ="${nuevoLocalizacion2}",
+            fecha_in="${nuevoFechaIn}",
+            fecha_fin= "${nuevoFechaFin}",
+            hora ="${nuevoHora}",
+            artista = "${nuevoArtista}",
+            descripcion = "${nuevoDescripcion}",
+            prezo ="${nuevoPrezo}",
+           imagen = "${ nuevoImagen}",
+            fk_clasificacion = "${nuevoFkClasificacion}",
+           fk_usuario = ${nuevoFkUsuario},
+            publicacion  = "${nuevoPublicacion}"
+            WHERE id = ${id}
+      `
+            const result = await connection.query(sql);
+            resolve(result)
+
+        } catch (error) {
+            console.log(error)
+            reject(error)
+        }
+    })
+}
+
+
+
 //5. EVENTOS.DELETE ==BORRA UN EVENTO
 exports.borrarEvento = (idEvento) => {
     return new Promise(async (resolve, reject) => {

@@ -105,6 +105,49 @@ exports.eventById = async (req, res) => {
 }
 //4.EVENTOS.PUT ==CAMBIA LOS DATOS DE UN EVENTO
 
+exports.modificarEvento = async (req, res) => {
+    const errors = 0
+    //validationResult(req)//Ejecuta las validaciones
+    if (errors == 0
+        //errors.isEmpty()
+    ) {
+        const id = req.body.id;
+        const nuevoNombreEvento = req.body.nombreEvento;
+        const nuevoLocation1 = req.body.location1;
+        const nuevoFkConcellos = req.body.fk_concellos;
+        const nuevoLocalizacion2 = req.body.localizacion2;
+        const nuevoFechaIn = req.body.fecha_in;
+        const nuevoFechaFin = req.body.fecha_fin;
+        const nuevoHora = req.body.hora;
+        const nuevoArtista = req.body.artista;
+        const nuevoDescripcion = req.body.descripcion;
+        const nuevoPrezo = req.body.prezo;
+        const nuevoImagen = req.body.imagen;
+        const nuevoFkClasificacion = req.body.fk_clasificacion;
+        const nuevoFkUsuario = req.body.fk_usuario;
+        const nuevoPublicacion = req.body.publicacion;
+
+        //Llamamos al modelo
+        try {
+            const result = await eventosModel.modificarEvento(id, nuevoNombreEvento, nuevoLocation1, nuevoFkConcellos, nuevoLocalizacion2, nuevoFechaIn, nuevoFechaFin, nuevoHora, nuevoArtista, nuevoDescripcion, nuevoPrezo, nuevoImagen, nuevoFkClasificacion, nuevoFkUsuario, nuevoPublicacion);
+            if (result.affectedRows > 0) {
+                res.send({ "message": "Datos de evento modificados con éxito" })
+            } else {
+                res.status(404).send({ "error": "Ese evento non existe" })
+            }
+        }
+        catch (error) {
+            console.log(error)
+            res.send(error);
+        }
+    } else {
+        res.status(400).send({ "error": "O body está mal formado", "explicación": errors })
+    }
+}
+
+
+
+
 //5. EVENTOS.DELETE ==BORRA UN EVENTO
 exports.borrarEvento = async (req, res) => {
     //Cogemos de los path params el nombreUsuario
