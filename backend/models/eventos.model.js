@@ -2,12 +2,12 @@ const connection = require('./db.model');
 
 //1.EVENTOS.POST ==CREAR NUEVO EVENTO
 
-exports.crearEvento = (nombreEvento, location1, fk_concellos, localizacion2, fecha, hora, artista, descripcion, prezo, imagen, fk_clasificacion, fk_usuario, publicacion) => {
+exports.crearEvento = (nombreEvento, location1, fk_concellos, localizacion2, fecha_in, fecha_fin, hora, artista, descripcion, prezo, imagen, fk_clasificacion, fk_usuario, publicacion) => {
     return new Promise(async (resolve, reject) => {
         try {
             const result = await connection.query(
-                ` INSERT INTO eventos(nombreEvento, location1, fk_concellos, localizacion2,fecha,hora,artista,descripcion,prezo,imagen,fk_clasificacion,fk_usuario,publicacion)
-                VALUES("${nombreEvento}", "${location1}", ${fk_concellos}, "${localizacion2}", "${fecha}", ${hora}, "${artista}", "${descripcion}", ${prezo}, ${imagen}, ${fk_clasificacion}, ${fk_usuario}, ${publicacion})`
+                ` INSERT INTO eventos(nombreEvento, location1, fk_concellos, localizacion2,fecha_in,fecha_fin,hora,artista,descripcion,prezo,imagen,fk_clasificacion,fk_usuario,publicacion)
+                VALUES("${nombreEvento}", "${location1}", ${fk_concellos}, "${localizacion2}", "${fecha_in}","${fecha_fin}", "${hora}", "${artista}", "${descripcion}", "${prezo}", "${imagen}", ${fk_clasificacion}, ${fk_usuario}, ${publicacion})`
             )
             resolve(result)
         } catch (error) {

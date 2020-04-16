@@ -30,10 +30,11 @@ exports.crearEvento = async (req, res) => {
                   res.send({ "message": "O campo 'Concello'  debe conter datos" })
               }*/
             const localizacion2 = req.body.localizacion2;
-            const fecha = req.body.fecha;
+            const fecha_in = req.body.fecha_in;
             /*   if (fecha.length == 0) {
                    res.send({ "message": "O campo 'Data' debe conter datos" })
                }*/
+            const fecha_fin = req.body.fecha_fin;
             const hora = req.body.hora;
             const artista = req.body.artista;
             /* if (artista.length == 0) {
@@ -50,8 +51,8 @@ exports.crearEvento = async (req, res) => {
 
             //Publicacion siempre será 1 hasta que un administrador lo cambie a 0 para que aparezca publicado
             const publicacion = 1;
-            console.log(location1)
-            const result = await eventosModel.crearEvento(nombreEvento, location1, fk_concellos, localizacion2, fecha, hora, artista, descripcion, prezo, imagen, fk_clasificacion, fk_usuario, publicacion)
+
+            const result = await eventosModel.crearEvento(nombreEvento, location1, fk_concellos, localizacion2, fecha_in, fecha_fin, hora, artista, descripcion, prezo, imagen, fk_clasificacion, fk_usuario, publicacion)
 
             //VALIDACION2
 

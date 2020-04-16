@@ -68,19 +68,7 @@ server.delete('/deleteuser/:nombreUsuario', usersController.borrarUsuario);
 //TABLA EVENTOS
 
 //1.EVENTOS.POST ==CREAR NUEVO EVENTO
-server.post('/novoEvento', [
-    check('nombreEvento').trim().notEmpty(),
-    check('location1').trim(),
-    check('fk_concellos').trim().notEmpty(),
-    check('localizacion2').trim(),
-    check('fecha').trim().notEmpty(),
-    check('hora').trim(),
-    check('artista').trim().notEmpty(),
-    check('descripcion').trim(),
-    check('prezo').trim(),
-    check('imagen').trim(),
-    check('clasificacion').notEmpty()
-], eventosController.crearEvento);
+server.post('/novoEvento', eventosController.crearEvento);
 
 
 
