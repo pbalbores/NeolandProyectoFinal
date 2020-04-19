@@ -35,8 +35,6 @@ exports.nuevoUsuario = async (req, res) => {
         console.log(error);
         res.send(error);
     }
-
-
 }
 
 //2. USUARIOS.GET ==DEVUELVE TODOS LOS USUARIOS--GET ALL---------------------------------------------------------
@@ -78,14 +76,15 @@ exports.modificarUsuario = async (req, res) => {
     const errors = validationResult(req)//Ejecuta las validaciones
     if (errors.isEmpty()) {
         const nombreUsuario = req.body.nombreUsuario;
-        const password = req.body.password;
+        const hash = await bcrypt.hash(req.body.password, 14);
+        //const password = req.body.password;
         const email = req.body.email;
         const admin = req.body.admin;
         const id = req.body.id;
 
         //Llamamos al modelo
         try {
-            const result = await usuariosModel.modificarUsuario(id, nombreUsuario, password, email, admin);
+            const result = await usuariosModel.modificarUsuario(id, nombreUsuario, hash, email, admin);
             if (result.affectedRows > 0) {
                 res.send({ "message": "Datos de usuario modificados con éxito" })
             } else {
@@ -121,25 +120,66 @@ exports.borrarUsuario = async (req, res) => {
     }
 }
 
-//6. USUARIOS LOGIN
+//6. USUARIOS LOGIN----------------------------------------------------------------------------------------------
 exports.usersLogin = async (req, res) => {
-    //VALIDAR BODY
-    const userName = req.body.nombreUsuario;
-    const password = req.body.password;
+    const errors = validationResult(req);
+    console.log(errors)
+    if (errors.isEmpty()) {
+        const userName = req.body.nombreUsuario;
+        const password = req.body.password;
 
-    try {
-        const usuario = await usuariosModel.getUserByName(userName);
-        console.log(usuario[0]);
-        const match = await bcrypt.compare(password, usuario[0].password);
-        if (match === true) {
-            res.send({ "message": "Ok, o teu contrasinal é correcto. Estás autorizado" })
-        } else {
-            res.status(400).send({ "Error": "O contrasinal non é correcto. Volve a intentalo" })
+        try {
+
+            const usuario = await usuariosModel.getUserByName(userName);
+
+            for (let i = 0; i < usuario.length; i++) {
+                const match = await bcrypt.compare(password, usuario[i].password);
+                if (match === true) {
+
+                    res.send({ "message": "Ok, o teu contrasinal é correcto. Estás autorizado" })
+                } else if (i == usuario.length - 1) {
+                    console.log(i)
+                    res.status(400).send({ "Error": "O contrasinal non é correcto. Volve a intentalo" })
+                }
+            }
+
+        } catch (error) {
+            console.log(error);
+            res.send(error);
         }
-
-    } catch (error) {
-        console.log(error);
-        res.send(error);
+    } else {
+        res.send({ "message": "Dedes incluír un Usuario e un Contrasinal" })
     }
+}
 
+//7. RECUPERAR CONTRASEÑA. COMPROBAMOS QUE USUARIO Y EMAIL COINCIDEN---------------------------------------------
+exports.usersPasswordRecover = async (req, res) => {
+    const errors = validationResult(req);
+    console.log(errors)
+    if (errors.isEmpty()) {
+        const userName = req.body.nombreUsuario;
+        const email = req.body.email;
+
+        try {
+
+            const usuario = await usuariosModel.getUserByName(userName);
+
+            for (let i = 0; i < usuario.length; i++) {
+
+                if (email === usuario[i].email) {
+
+                    res.send({ "message": "Ok, introduce un novo contrasinal" })
+                } else if (i == usuario.length - 1) {
+                    console.log(i)
+                    res.status(400).send({ "Error": "O Email e o usuario non coinciden. Téntao de novo" })
+                }
+            }
+
+        } catch (error) {
+            console.log(error);
+            res.send(error);
+        }
+    } else {
+        res.send({ "message": "Dedes incluír un Usuario e un EMail" })
+    }
 }

@@ -69,8 +69,17 @@ server.put('/users/change', [
 //5. USUARIOS DELETE ==BORRA UN USUARIO--------------------------------------------------------------------------
 server.delete('/users/delete/:nombreUsuario', usersController.borrarUsuario);
 
-//6. USUARIOS LOGIN ==PERMITE QUE EL USUARIO Y LA CONTRASEÑA COINCIDEN ------------------------------------------
-server.post('/users/login', usersController.usersLogin);
+//6. USUARIOS LOGIN ==PRUEBA QUE EL USUARIO Y LA CONTRASEÑA COINCIDEN ------------------------------------------
+server.post('/users/login', [
+    check('nombreUsuario').isString().escape().trim(),
+    check('password').isString().escape().trim()], usersController.usersLogin);
+
+//7. RECUPERAR CONTRASEÑA ==COMPROBAMOS QUE USUARIO Y EMAIL COINCIDEN--------------------------------------------
+server.post('/users/recovery', [
+    check('nombreUsuario').isString().escape().trim(),
+    check('email').isEmail().escape().trim(),
+], usersController.usersPasswordRecover);
+
 
 //-----------------##-TABLA EVENTOS-##---------------------------------------------------------------------------
 
