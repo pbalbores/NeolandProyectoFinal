@@ -1,5 +1,6 @@
 const usuariosModel = require('../models/usuarios.model');
 const { validationResult } = require('express-validator');
+const bcrypt = require('bcrypt');
 
 
 //1. USUARIOS.POST ==NUEVO USUARIO--POST-------------------------------------------------------------------------
@@ -15,12 +16,14 @@ exports.nuevoUsuario = async (req, res) => {
 
             //SACAMOS DEL BODY LA INFORMACIÓN
             const nombre = req.body.nombreUsuario;
-            const password = req.body.password;
             const email = req.body.email;
+
             //El usuario siempre se crea por defecto en 0 (no administrador)
             const admin = 0;
 
-            const result = await usuariosModel.crearUsuario(nombre, password, email, admin)
+            //Obtenemos la contraseña y la hasheamos
+            const hash = await bcrypt.hash(req.body.password, 14);
+            const result = await usuariosModel.crearUsuario(nombre, hash, email, admin)
 
             //INSERTAMOS LA INFORMACIÓN
             res.send({ "message": "Usuario creado. Agora podes enviarnos información de eventos.", "ID": result.insertId, })
@@ -116,4 +119,27 @@ exports.borrarUsuario = async (req, res) => {
     } catch (error) {
         res.send(error)
     }
+}
+
+//6. USUARIOS LOGIN
+exports.usersLogin = async (req, res) => {
+    //VALIDAR BODY
+    const userName = req.body.nombreUsuario;
+    const password = req.body.password;
+
+    try {
+        const usuario = await usuariosModel.getUserByName(userName);
+        console.log(usuario[0]);
+        const match = await bcrypt.compare(password, usuario[0].password);
+        if (match === true) {
+            res.send({ "message": "Ok, o teu contrasinal é correcto. Estás autorizado" })
+        } else {
+            res.status(400).send({ "Error": "O contrasinal non é correcto. Volve a intentalo" })
+        }
+
+    } catch (error) {
+        console.log(error);
+        res.send(error);
+    }
+
 }

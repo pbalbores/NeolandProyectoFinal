@@ -3,6 +3,7 @@
 const express = require('express');
 const helmet = require('helmet');
 const bcrypt = require('bcrypt');
+//Instalar versión 4.0.0 (npm i bcrypt@4.0.0)
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 //EXPRESS VALIDATOR SE IMPORTA DE UNA FORMA ESPECIAL
@@ -42,7 +43,7 @@ server.get("/test", (req, res) => {
 
 
 ///-------------------------##-TABLA USUARIOS-##-----------------------------------------------------------------
-//FALTA PARSEAR CONTRASEÑAS
+
 //1. USUARIOS.POST ==NUEVO USUARIO--POST-------------------------------------------------------------------------
 server.post('/users/new', [
     check('nombreUsuario').isString().escape().trim(),
@@ -68,6 +69,9 @@ server.put('/users/change', [
 //5. USUARIOS DELETE ==BORRA UN USUARIO--------------------------------------------------------------------------
 server.delete('/users/delete/:nombreUsuario', usersController.borrarUsuario);
 
+//6. USUARIOS LOGIN ==PERMITE QUE EL USUARIO Y LA CONTRASEÑA COINCIDEN ------------------------------------------
+server.post('/users/login', usersController.usersLogin);
+
 //-----------------##-TABLA EVENTOS-##---------------------------------------------------------------------------
 
 //1.EVENTOS.POST ==CREAR NUEVO EVENTO----------------------------------------------------------------------------
@@ -86,6 +90,15 @@ server.put('/eventos/change', eventosController.modificarEvento)
 //5. EVENTOS.DELETE ==BORRA UN EVENTO----------------------------------------------------------------------------
 server.delete('/eventos/delete/:idEvento', eventosController.borrarEvento);
 
+
+//-----------------##-TABLA CONCELLOS-##------------------------------------------------------------------------
+
+//1. DEVUELVE UN CONCELLO POR ID
+//==IMPLEMENTAR
+//-----------------##-TABLA CLASIFICACION-##---------------------------------------------------------------------
+
+//1.DEVUELVE UNA CLASIFICACIÓN POR ID
+//==IMPLEMENTAR
 //************************************************************************************************************** 
 
 //-----------------##-LISTEN-##----------------------------------------------------------------------------------
