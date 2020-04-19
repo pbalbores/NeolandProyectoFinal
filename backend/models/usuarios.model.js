@@ -1,13 +1,11 @@
-//*
-//*
-//*SE COMUNICA CON LA TABLA USUARIOS DE LA BASE DE DATOS
-//*
 
+//*SE COMUNICA CON LA TABLA USUARIOS DE LA BASE DE DATOS---------------------------------------------------------
+//*
 const connection = require('./db.model');
 
-//CRUD SOBRE TABLA USUARIOS
+//------------------##-CRUD SOBRE TABLA USUARIOS-##--------------------------------------------------------------
 
-//1. INSERT == CREATE NEW USER----POST
+//1. INSERT == CREATE NEW USER----POST---------------------------------------------------------------------------
 
 exports.crearUsuario = (nombreUsuario, password, email, admin) => {
     return new Promise(async (resolve, reject) => {
@@ -25,7 +23,7 @@ exports.crearUsuario = (nombreUsuario, password, email, admin) => {
     })
 }
 
-//2. GET OBTENER TODOS LOS USUARIOS---GET ALL
+//2. GET OBTENER TODOS LOS USUARIOS---GET ALL--------------------------------------------------------------------
 
 exports.obtenerTodosUsuarios = () => {
 
@@ -40,7 +38,7 @@ exports.obtenerTodosUsuarios = () => {
 
 }
 
-//3. OBTENER DATOS DE UN USUARIO UTILIZANDO EL NOMBRE DE USUARIO---GET DETAIL
+//3. OBTENER DATOS DE UN USUARIO UTILIZANDO EL NOMBRE DE USUARIO---GET DETAIL-----------------------------------
 exports.getUserByName = (userName) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -53,7 +51,7 @@ exports.getUserByName = (userName) => {
     })
 }
 
-//4. USUARIOS.PUT ==CAMBIA LOS DATOS DE UN USUARIO --PUT
+//4. USUARIOS.PUT ==CAMBIA LOS DATOS DE UN USUARIO --PUT---------------------------------------------------------
 
 exports.modificarUsuario = (id, nuevoNombre, nuevaPassword, nuevoEmail, nuevoAdmin) => {
     return new Promise(async (resolve, reject) => {
@@ -76,7 +74,7 @@ exports.modificarUsuario = (id, nuevoNombre, nuevaPassword, nuevoEmail, nuevoAdm
     })
 }
 
-//5. USUARIOS DELETE ==BORRA UN USUARIO
+//5. USUARIOS DELETE ==BORRA UN USUARIO--------------------------------------------------------------------------
 
 exports.borrarUsuario = (nombreUsuario) => {
     return new Promise(async (resolve, reject) => {

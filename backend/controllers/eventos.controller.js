@@ -1,7 +1,9 @@
+
+//Importaciones
 const eventosModel = require('../models/eventos.model');
 const { validationResult } = require('express-validator');
 
-//1.EVENTOS.POST ==CREAR NUEVO EVENTO
+//1.EVENTOS.POST ==CREAR NUEVO EVENTO----------------------------------------------------------------------------
 exports.crearEvento = async (req, res) => {
 
     //LLAMAMOS AL MODELO PARA CREAR UN NUEVO EVENTO
@@ -71,7 +73,7 @@ exports.crearEvento = async (req, res) => {
 
 }
 
-//2.EVENTOS.GET ==DEVUELVE TODOS LOS EVENTOS
+//2.EVENTOS.GET ==DEVUELVE TODOS LOS EVENTOS---------------------------------------------------------------------
 
 exports.listaEventos = async (req, res) => {
     try {
@@ -86,7 +88,7 @@ exports.listaEventos = async (req, res) => {
     }
 }
 
-//3.EVENTOS.GET ==DEVUELVE UN EVENTO
+//3.EVENTOS.GET ==DEVUELVE UN EVENTO-----------------------------------------------------------------------------
 exports.eventById = async (req, res) => {
     try {
         //Sacar del Path param el id del evento
@@ -104,7 +106,7 @@ exports.eventById = async (req, res) => {
         res.send(error)
     }
 }
-//4.EVENTOS.PUT ==CAMBIA LOS DATOS DE UN EVENTO
+//4.EVENTOS.PUT ==CAMBIA LOS DATOS DE UN EVENTO------------------------------------------------------------------
 
 exports.modificarEvento = async (req, res) => {
     const errors = 0
@@ -146,10 +148,7 @@ exports.modificarEvento = async (req, res) => {
     }
 }
 
-
-
-
-//5. EVENTOS.DELETE ==BORRA UN EVENTO
+//5. EVENTOS.DELETE ==BORRA UN EVENTO----------------------------------------------------------------------------
 exports.borrarEvento = async (req, res) => {
     //Cogemos de los path params el nombreUsuario
     const idEvento = req.params.idEvento;

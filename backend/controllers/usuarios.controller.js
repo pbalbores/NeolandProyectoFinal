@@ -2,7 +2,7 @@ const usuariosModel = require('../models/usuarios.model');
 const { validationResult } = require('express-validator');
 
 
-//1. CREAR NUEVO USUARIO--POST
+//1. USUARIOS.POST ==NUEVO USUARIO--POST-------------------------------------------------------------------------
 
 exports.nuevoUsuario = async (req, res) => {
 
@@ -36,7 +36,7 @@ exports.nuevoUsuario = async (req, res) => {
 
 }
 
-//2. OBTENER TODOS LOS USUARIOS ----GET ALL
+//2. USUARIOS.GET ==DEVUELVE TODOS LOS USUARIOS--GET ALL---------------------------------------------------------
 exports.listaUsuarios = async (req, res) => {
     try {
         const resultados = await usuariosModel.obtenerTodosUsuarios();
@@ -50,7 +50,7 @@ exports.listaUsuarios = async (req, res) => {
     }
 }
 
-//3. OBTENER DATOS DE UN USUARIO UTILIZANDO EL NOMBRE DE USUARIO ----GET DETAIL
+//3. USUARIOS.GET ==DEVUELVE UN SOLO USUARIO--GET DETAIL---------------------------------------------------------
 exports.getUsuarioByName = async (req, res) => {
     try {
         //Sacar del Path param el nombre del usuario
@@ -69,7 +69,7 @@ exports.getUsuarioByName = async (req, res) => {
     }
 }
 
-//4. USUARIOS.PUT ==CAMBIA LOS DATOS DE UN USUARIO --PUT
+//4. USUARIOS.PUT ==CAMBIA LOS DATOS DE UN USUARIO --PUT---------------------------------------------------------
 
 exports.modificarUsuario = async (req, res) => {
     const errors = validationResult(req)//Ejecuta las validaciones
@@ -98,7 +98,7 @@ exports.modificarUsuario = async (req, res) => {
     }
 }
 
-//5. USUARIOS DELETE ==BORRA UN USUARIO
+//5. USUARIOS DELETE ==BORRA UN USUARIO--------------------------------------------------------------------------
 exports.borrarUsuario = async (req, res) => {
     //Cogemos de los path params el nombreUsuario
     const nombreUsuario = req.params.nombreUsuario;

@@ -1,6 +1,7 @@
+//Importaciones
 const connection = require('./db.model');
 
-//1.EVENTOS.POST ==CREAR NUEVO EVENTO
+//1.EVENTOS.POST ==CREAR NUEVO EVENTO----------------------------------------------------------------------------
 
 exports.crearEvento = (nombreEvento, location1, fk_concellos, localizacion2, fecha_in, fecha_fin, hora, artista, descripcion, prezo, imagen, fk_clasificacion, fk_usuario, publicacion) => {
     return new Promise(async (resolve, reject) => {
@@ -19,7 +20,7 @@ exports.crearEvento = (nombreEvento, location1, fk_concellos, localizacion2, fec
 }
 
 
-//2.EVENTOS.GET ==DEVUELVE TODOS LOS EVENTOS
+//2.EVENTOS.GET ==DEVUELVE TODOS LOS EVENTOS---------------------------------------------------------------------
 
 exports.obtenerTodosEventos = () => {
 
@@ -33,7 +34,7 @@ exports.obtenerTodosEventos = () => {
     })
 
 }
-//3.EVENTOS.GET ==DEVUELVE UN EVENTO
+//3.EVENTOS.GET ==DEVUELVE UN EVENTO-----------------------------------------------------------------------------
 
 exports.getEventById = (id) => {
     return new Promise(async (resolve, reject) => {
@@ -46,7 +47,8 @@ exports.getEventById = (id) => {
         }
     })
 }
-//4.EVENTOS.PUT ==CAMBIA LOS DATOS DE UN EVENTO
+
+//4.EVENTOS.PUT ==CAMBIA LOS DATOS DE UN EVENTO------------------------------------------------------------------
 
 exports.modificarEvento = (id, nuevoNombreEvento, nuevoLocation1, nuevoFkConcellos, nuevoLocalizacion2, nuevoFechaIn, nuevoFechaFin, nuevoHora, nuevoArtista, nuevoDescripcion, nuevoPrezo, nuevoImagen, nuevoFkClasificacion, nuevoFkUsuario, nuevoPublicacion) => {
     return new Promise(async (resolve, reject) => {
@@ -79,9 +81,7 @@ exports.modificarEvento = (id, nuevoNombreEvento, nuevoLocation1, nuevoFkConcell
     })
 }
 
-
-
-//5. EVENTOS.DELETE ==BORRA UN EVENTO
+//5. EVENTOS.DELETE ==BORRA UN EVENTO----------------------------------------------------------------------------
 exports.borrarEvento = (idEvento) => {
     return new Promise(async (resolve, reject) => {
         try {
