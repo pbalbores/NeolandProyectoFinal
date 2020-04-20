@@ -16,6 +16,8 @@ const mysql = require('mysql');
 //const users_controller = require('./controllers/users_controller');
 const usersController = require('./controllers/usuarios.controller');
 const eventosController = require('./controllers/eventos.controller');
+const concellosController = require('./controllers/concellos.controller');
+const categoriasController = require('./controllers/categorias.controller');
 
 //Creamos servidor-----------------------------------------------------------------------------------------------
 const server = express();
@@ -102,12 +104,18 @@ server.delete('/eventos/delete/:idEvento', eventosController.borrarEvento);
 
 //-----------------##-TABLA CONCELLOS-##------------------------------------------------------------------------
 
-//1. DEVUELVE UN CONCELLO POR ID
-//==IMPLEMENTAR
-//-----------------##-TABLA CLASIFICACION-##---------------------------------------------------------------------
+//1. DEVUELVE TODOS LOS CONCELLOS
+server.get('/concellos/all', concellosController.listaConcellos);
 
-//1.DEVUELVE UNA CLASIFICACIÓN POR ID
-//==IMPLEMENTAR
+//2. DEVUELVE UN CONCELLO POR ID
+server.get('/concellos/:id', concellosController.getConcelloById);
+//-----------------##-TABLA CATEGORÍAS-##---------------------------------------------------------------------
+
+//1.DEVUELVE TODAS LAS CATEGORÍAS
+server.get('/categorias/all', categoriasController.listaCategorias);
+//2. DEVUELVE UN CONCELLO POR ID
+server.get('/categorias/:id', categoriasController.getCategoriaById);
+
 //************************************************************************************************************** 
 
 //-----------------##-LISTEN-##----------------------------------------------------------------------------------
