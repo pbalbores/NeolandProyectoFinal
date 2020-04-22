@@ -10,63 +10,38 @@ exports.crearEvento = async (req, res) => {
 
     try {
 
-        const errors = 0
-        //validationResult(req);
-        console.log(errors)
-        if (errors == 0
-            //errors.isEmpty()
-        ) {
+        const errors = validationResult(req);
+        console.log(`Errores de validación del Body ${errors}`)
+        if (errors.isEmpty()) {
 
             //SACAMOS DEL BODY LA INFORMACIÓN
 
             const nombreEvento = req.body.nombreEvento;
-            /* if (nombreEvento.length == 0) {
-                 res.send({ "message": "O nome de evento debe conter datos" })
-             }*/
             const location1 = req.body.location1;
-            /*  if (location1.length == 0) {
-                  location1 = "non achegado"  
-              }*/
             const fk_concellos = req.body.fk_concellos;
-            /*  if (fk_concellos.length == 0) {
-                  res.send({ "message": "O campo 'Concello'  debe conter datos" })
-              }*/
             const localizacion2 = req.body.localizacion2;
             const fecha_in = req.body.fecha_in;
-            /*   if (fecha.length == 0) {
-                   res.send({ "message": "O campo 'Data' debe conter datos" })
-               }*/
             const fecha_fin = req.body.fecha_fin;
             const hora = req.body.hora;
             const artista = req.body.artista;
-            /* if (artista.length == 0) {
-                 res.send({ "message": "O campo 'Artista'  debe conter datos" })
-             }*/
             const descripcion = req.body.descripcion;
             const prezo = req.body.prezo;
             const imagen = req.body.imagen;
             const fk_clasificacion = req.body.fk_clasificacion;
-            /*  if (fk_clasificacion.length == 0) {
-                  res.send({ "message": "O campo 'Clasificacion'  debe conter datos" })
-              }*/
             const fk_usuario = req.body.fk_usuario;
-
             //Publicacion siempre será 1 hasta que un administrador lo cambie a 0 para que aparezca publicado
             const publicacion = 1;
 
             const result = await eventosModel.crearEvento(nombreEvento, location1, fk_concellos, localizacion2, fecha_in, fecha_fin, hora, artista, descripcion, prezo, imagen, fk_clasificacion, fk_usuario, publicacion)
 
-            //VALIDACION2
-
-
             //INSERTAMOS LA INFORMACIÓN
             res.send({ "message": "Evento creado. Debe ser aprobado pola Administración da páxina para que poida ser visíbel.", "ID": result.insertId, })
         } else {
-            console.log(errors)
-            res.status(400).send(`Error producido por Validation results ${error}`)
+            console.log(errors.array())
+            res.status(400).send(`Error producido por Validation results ${errors}`)
         }
     } catch (error) {
-        console.log(error);
+        console.log(`Error en el catch de Controller ${error}`);
         res.send(`Error producido en la Base de Datos: ${error}`);
     }
 
@@ -109,10 +84,8 @@ exports.eventById = async (req, res) => {
 //4.EVENTOS.PUT ==CAMBIA LOS DATOS DE UN EVENTO------------------------------------------------------------------
 
 exports.modificarEvento = async (req, res) => {
-    const errors = 0
-    //validationResult(req)//Ejecuta las validaciones
-    if (errors == 0
-        //errors.isEmpty()
+    const errors = validationResult(req)//Ejecuta las validaciones
+    if (errors.isEmpty()
     ) {
         const id = req.body.id;
         const nuevoNombreEvento = req.body.nombreEvento;
@@ -170,12 +143,21 @@ exports.borrarEvento = async (req, res) => {
 
 //6. FILTRA EVENTOS-----------------------------------------------------------------------------------------
 exports.filtrarEventos = async (req, res) => {
-    //Falta implementar validaciones body
-    const datos = req.body;
-    console.log(datos)
+
     try {
-        const datosFiltrados = await eventosModel.filtrarEventos(datos)
-        res.send(datosFiltrados)
+        const errors = validationResult(req);
+        console.log(`Errores de validación del Body ${errors.array}`)
+        if (errors.isEmpty()) {
+            const datos = req.body; {
+                const datosFiltrados = await eventosModel.filtrarEventos(datos)
+                // res.send(datosFiltrados)
+                if (datosFiltrados.isEmpty) {
+                    res.send({ "error": "Non existen eventos para eses criterios de busca. Proba con outros" })
+                } else {
+                    res.send(datosFiltrados)
+                }
+            }
+        }
     } catch (error) {
         res.send(error)
     }

@@ -84,8 +84,22 @@ server.post('/users/recovery', [
 //-----------------##-TABLA EVENTOS-##---------------------------------------------------------------------------
 
 //1.EVENTOS.POST ==CREAR NUEVO EVENTO----------------------------------------------------------------------------
-server.post('/eventos/new', eventosController.crearEvento);
-//Sin implementar la validación del Body
+server.post('/eventos/new', [
+    check('nombreEvento').not().isEmpty().isString().escape().trim(),
+    check('location1').optional().isString().escape().trim(),
+    check('fk_concellos').not().isEmpty().isNumeric().escape().trim(),
+    check('localizacion2').optional().isString().escape().trim(),
+    check('fecha_in').not().isEmpty().isString().escape().trim(),
+    check('fecha_fin').optional().isString().escape().trim(),
+    check('hora').optional().isString().escape().trim(),
+    check('artista').not().isEmpty().isString().escape().trim(),
+    check('descripcion').optional().isString().escape().trim(),
+    check('prezo').optional().isString().escape().trim(),
+    check('imagen').optional().isString().escape().trim(),
+    check('fk_clasificacion').not().isEmpty().isNumeric().escape().trim(),
+    check('fk_usuario').not().isEmpty().isNumeric().escape().trim(),
+    check('publicacion').optional().isNumeric().escape().trim()
+], eventosController.crearEvento);
 
 //2.EVENTOS.GET ==DEVUELVE TODOS LOS EVENTOS---------------------------------------------------------------------
 server.get('/eventos/all', eventosController.listaEventos);
@@ -95,13 +109,27 @@ server.get('/eventos/:id', eventosController.eventById);
 
 //4.EVENTOS.PUT ==CAMBIA LOS DATOS DE UN EVENTO------------------------------------------------------------------
 //Sin implementar la valñidación del Body
-server.put('/eventos/change', eventosController.modificarEvento);
+server.put('/eventos/change', [check('nombreEvento').not().isEmpty().isString().escape().trim(),
+check('location1').optional().isString().escape().trim(),
+check('fk_concellos').not().isEmpty().isNumeric().escape().trim(),
+check('localizacion2').optional().isString().escape().trim(),
+check('fecha_in').not().isEmpty().isString().escape().trim(),
+check('fecha_fin').optional().isString().escape().trim(),
+check('hora').optional().isString().escape().trim(),
+check('artista').not().isEmpty().isString().escape().trim(),
+check('descripcion').optional().isString().escape().trim(),
+check('prezo').optional().isString().escape().trim(),
+check('imagen').optional().isString().escape().trim(),
+check('fk_clasificacion').not().isEmpty().isNumeric().escape().trim(),
+check('fk_usuario').not().isEmpty().isNumeric().escape().trim(),
+check('publicacion').optional().isNumeric().escape().trim()
+], eventosController.modificarEvento);
 
 //5. EVENTOS.DELETE ==BORRA UN EVENTO----------------------------------------------------------------------------
 server.delete('/eventos/delete/:idEvento', eventosController.borrarEvento);
 
 //6. EVENTOS PUT FILTRADOS
-//Falta implementar validaciones body
+
 server.put('/eventos/filtrar', eventosController.filtrarEventos);
 
 
