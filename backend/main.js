@@ -37,12 +37,10 @@ server.use(express.static('static'))
 
 //-------------**-ENDPOINTS-**-----------------------------------------------------------------------------------
 
-
 //Comprobamos que el servidor funciona---------------------------------------------------------------------------
 server.get("/test", (req, res) => {
-    res.send("Felicidades. El servidor está funcionando. De momento no peta. ¡Muy bien!");
+    res.send("Parabéns. Servidor funcionando. De momento non peta. Moi bien!");
 });
-
 
 ///-------------------------##-TABLA USUARIOS-##-----------------------------------------------------------------
 
@@ -90,16 +88,21 @@ server.post('/eventos/new', eventosController.crearEvento);
 //Sin implementar la validación del Body
 
 //2.EVENTOS.GET ==DEVUELVE TODOS LOS EVENTOS---------------------------------------------------------------------
-server.get('/eventos/all', eventosController.listaEventos)
+server.get('/eventos/all', eventosController.listaEventos);
+
 //3.EVENTOS.GET ==DEVUELVE UN EVENTO-----------------------------------------------------------------------------
-server.get('/eventos/:id', eventosController.eventById)
+server.get('/eventos/:id', eventosController.eventById);
 
 //4.EVENTOS.PUT ==CAMBIA LOS DATOS DE UN EVENTO------------------------------------------------------------------
 //Sin implementar la valñidación del Body
-server.put('/eventos/change', eventosController.modificarEvento)
+server.put('/eventos/change', eventosController.modificarEvento);
 
 //5. EVENTOS.DELETE ==BORRA UN EVENTO----------------------------------------------------------------------------
 server.delete('/eventos/delete/:idEvento', eventosController.borrarEvento);
+
+//6. EVENTOS PUT FILTRADOS
+//Falta implementar validaciones body
+server.put('/eventos/filtrar', eventosController.filtrarEventos);
 
 
 //-----------------##-TABLA CONCELLOS-##------------------------------------------------------------------------
@@ -113,6 +116,7 @@ server.get('/concellos/:id', concellosController.getConcelloById);
 
 //1.DEVUELVE TODAS LAS CATEGORÍAS
 server.get('/categorias/all', categoriasController.listaCategorias);
+
 //2. DEVUELVE UN CONCELLO POR ID
 server.get('/categorias/:id', categoriasController.getCategoriaById);
 

@@ -25,7 +25,7 @@ exports.crearEvento = async (req, res) => {
              }*/
             const location1 = req.body.location1;
             /*  if (location1.length == 0) {
-                  location1 = "non achegado"
+                  location1 = "non achegado"  
               }*/
             const fk_concellos = req.body.fk_concellos;
             /*  if (fk_concellos.length == 0) {
@@ -163,6 +163,19 @@ exports.borrarEvento = async (req, res) => {
             res.status(404).send({ "error": "Ese evento non existe" })
         }
 
+    } catch (error) {
+        res.send(error)
+    }
+}
+
+//6. FILTRA EVENTOS-----------------------------------------------------------------------------------------
+exports.filtrarEventos = async (req, res) => {
+    //Falta implementar validaciones body
+    const datos = req.body;
+    console.log(datos)
+    try {
+        const datosFiltrados = await eventosModel.filtrarEventos(datos)
+        res.send(datosFiltrados)
     } catch (error) {
         res.send(error)
     }
