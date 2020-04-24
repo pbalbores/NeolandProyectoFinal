@@ -1,0 +1,17 @@
+<h1>Envíanos un novo evento</h1>
+<form (ngForm)="submitEvento" #EventoAddForm="ngForm" (ngSubmit)="submitEvento()">
+    Nome do evento: <input type="text" [(ngModel)]="nombreEvento" name="nombreEvento">
+    Localización 1:<input type="text" [(ngModel)]="location1" name="location1">
+    Concello:<input type="number" [(ngModel)]="fk_concellos" name="concello">
+    Localización 2: <input type="text" [(ngModel)]="localizacion2" name="localizacion2">
+    Data de incio: <input type="date" [(ngModel)]="fecha_in" name="fecha_in">
+    Data de finalización: <input type="date" [(ngModel)]="fecha_fin" name="fecha_fin">
+    Hora: <input type="text" [(ngModel)]="hora" name="hora">
+    Artista: <input type="text" [(ngModel)]="artista" name="artista">
+    Descrición do evento: <input type="text" [(ngModel)]="descripcion" name="descripcion">
+    Prezo: <input type="text" [(ngModel)]="prezo" name="prezo">
+    Imaxe: <input type="text" [(ngModel)]="imagen" name="imagen">
+    Clasificación: <input type="number" [(ngModel)]="fk_clasificacion" name="clasificacion">
+    Usuario: <input type="number" [(ngModel)]="fk_usuario" name="usuario">
+    <button type="submit">Envíar evento</button>
+</form>

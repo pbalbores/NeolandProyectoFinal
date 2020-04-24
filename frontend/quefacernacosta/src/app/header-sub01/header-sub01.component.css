@@ -1,0 +1,73 @@
+/*CARROUSEL
+.carrousel {
+  position: relative;
+}*/
+
+/*TÍTULOS*/
+.titulos {
+  position: absolute;
+  top: 200px;
+  left: 100px;
+
+}
+
+/*INICIO DIV LETRAS ENCIMA CARROUSEL*/
+.textoTituloTop {
+  font-weight: 800;
+  color: #0984e3;
+
+}
+
+.textoTitulo {
+  font-size: 70px;
+  font-weight: 800;
+  color: #ffff;
+  margin-top: -30px;
+}
+
+/*FORMULARIO*/
+.formulario {
+  position: absolute;
+  top: 350px;
+  left: 100px;
+
+}
+
+.menu2 {
+
+  padding-left: 75px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+}
+
+.menu2boton {
+  color: #0984e3;
+
+}
+
+.menu2boton:active {
+  background-color: #0984e3;
+  color: #ffff;
+
+}
+
+.menu2boton:focus {
+  background-color: #0984e3;
+  color: #ffff;
+}
+
+.menuBotones {
+  background-color: #0984e3;
+  padding: 5px;
+
+}
+
+.boton {
+  margin: 5px;
+}
+
+.textoBotones2 {
+  padding-left: 15px;
+  color: #ffff;
+}
