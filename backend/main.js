@@ -24,11 +24,16 @@ const server = express();
 
 //Midelwares-----------------------------------------------------------------------------------------------------
 server.use(helmet());
+// Configurar cabeceras y cors
+
+//Permite que el FrontEnd realice llamadas POST y PUT
 server.use(bodyParser.json());
 /*server.use(bodyParser.urlencoded({
     extended: true
 }));*/
+//PErmiter realizar llamadas desde Angular
 server.use(cors());
+
 
 //Creamos servidor estático-------------------------------------------------.------------------------------------
 server.use(express.static('static'))
