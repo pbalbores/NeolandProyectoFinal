@@ -18,6 +18,8 @@ const usersController = require('./controllers/usuarios.controller');
 const eventosController = require('./controllers/eventos.controller');
 const concellosController = require('./controllers/concellos.controller');
 const categoriasController = require('./controllers/categorias.controller');
+const middlewares = require('./middlewares/middelwares');
+
 
 //Creamos servidor-----------------------------------------------------------------------------------------------
 const server = express();
@@ -32,6 +34,7 @@ server.use(bodyParser.json());
     extended: true
 }));*/
 //PErmiter realizar llamadas desde Angular
+server.use(cookieParser());
 server.use(cors());
 
 
@@ -47,13 +50,13 @@ server.get("/test", (req, res) => {
     res.send("Parabéns. Servidor funcionando. De momento non peta. Moi bien!");
 });
 
-///-------------------------##-TABLA USUARIOS-##-----------------------------------------------------------------
+///-------------------------##-TABLA USUARIOS-##---------------------------------------------------------
 
-//1. USUARIOS.POST ==NUEVO USUARIO--POST-------------------------------------------------------------------------
+//1. USUARIOS.POST ==NUEVO USUARIO--POST-----------------------------------------------------------------
 server.post('/users/new', [
     check('nombreUsuario').isString().escape().trim(),
     check('password').isString().escape().trim(),
-    check('email').isString().escape().trim()]
+    check('email').isEmail().escape().trim()]
     , usersController.nuevoUsuario)
 
 //2. USUARIOS.GET ==DEVUELVE TODOS LOS USUARIOS--GET ALL---------------------------------------------------------
@@ -86,7 +89,7 @@ server.post('/users/recovery', [
 ], usersController.usersPasswordRecover);
 
 
-//-----------------##-TABLA EVENTOS-##---------------------------------------------------------------------------
+//-----------------##-TABLA EVENTOS-##-----------------------------------------------------------------
 
 //1.EVENTOS.POST ==CREAR NUEVO EVENTO----------------------------------------------------------------------------
 server.post('/eventos/new', [
@@ -104,7 +107,8 @@ server.post('/eventos/new', [
     check('fk_clasificacion').not().isEmpty().isNumeric().escape().trim(),
     check('fk_usuario').not().isEmpty().isNumeric().escape().trim(),
     check('publicacion').optional().isNumeric().escape().trim()
-], eventosController.crearEvento);
+], //middlewares.checkToken, 
+    eventosController.crearEvento);
 
 //2.EVENTOS.GET ==DEVUELVE TODOS LOS EVENTOS---------------------------------------------------------------------
 server.get('/eventos/all', eventosController.listaEventos);
@@ -113,7 +117,7 @@ server.get('/eventos/all', eventosController.listaEventos);
 server.get('/eventos/:id', eventosController.eventById);
 
 //4.EVENTOS.PUT ==CAMBIA LOS DATOS DE UN EVENTO------------------------------------------------------------------
-//Sin implementar la valñidación del Body
+//Sin implementar la validación del Body
 server.put('/eventos/change', [check('nombreEvento').not().isEmpty().isString().escape().trim(),
 check('location1').optional().isString().escape().trim(),
 check('fk_concellos').not().isEmpty().isNumeric().escape().trim(),

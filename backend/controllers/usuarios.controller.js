@@ -1,6 +1,9 @@
 const usuariosModel = require('../models/usuarios.model');
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
+const moment = require('moments');
+const jwt = require('jsonwebtoken');
+const secrets = require('../config/secrets');
 
 
 //1. USUARIOS.POST ==NUEVO USUARIO--POST-------------------------------------------------------------------------
@@ -100,7 +103,7 @@ exports.modificarUsuario = async (req, res) => {
     }
 }
 
-//5. USUARIOS DELETE ==BORRA UN USUARIO--------------------------------------------------------------------------
+//5. USUARIOS DELETE ==BORRA UN USUARIO----------------------------------------------------------------
 exports.borrarUsuario = async (req, res) => {
     //Cogemos de los path params el nombreUsuario
     const nombreUsuario = req.params.nombreUsuario;
@@ -120,7 +123,7 @@ exports.borrarUsuario = async (req, res) => {
     }
 }
 
-//6. USUARIOS LOGIN----------------------------------------------------------------------------------------------
+//6. USUARIOS LOGIN-----------------------------------------------------------------------------------
 exports.usersLogin = async (req, res) => {
     const errors = validationResult(req);
     console.log(errors)
@@ -129,14 +132,36 @@ exports.usersLogin = async (req, res) => {
         const password = req.body.password;
 
         try {
-
             const usuario = await usuariosModel.getUserByName(userName);
-
             for (let i = 0; i < usuario.length; i++) {
                 const match = await bcrypt.compare(password, usuario[i].password);
+                //Aquí va el json webtoken
                 if (match === true) {
+                    //Saco el Id del usuario y si es administrador o no del usuario que hizo match.
+                    //Se pasan los datos del Id del usuario y si es administardor o no para crear el token
+                    usuarioId = usuario[i].id;
+                    usuarioAdmin = usuario[i].admin;
+                    //Aquí va el json webtoken
+                    jwt.sign({ "userId": usuarioId, "administrador": usuarioAdmin },
+                        secrets.jwt_clave,
+                        //Pongo la clave que yo quiera. La tengo guardada en el archivo SECRETS
+                        (error, token) => {
+                            if (error) {
+                                console.log(error.json);
+                                res.send(error)
+                            } else {
+                                console.log(`Datos de nombre de usuario: ${usuarioId}, Datos de Admin:${usuarioAdmin}`)
+                                res.cookie("stamp", token);
+                                res.send({
+                                    "message": "Ok, o teu contrasinal é correcto. Estás autorizado", "token": token
 
-                    res.send({ "message": "Ok, o teu contrasinal é correcto. Estás autorizado" })
+                                })
+                            }
+
+                        }
+                        //Función que se ejcuta cuando haya terminado de generar el Token
+                    )
+
                 } else if (i == usuario.length - 1) {
                     console.log(i)
                     res.status(400).send({ "Error": "O contrasinal non é correcto. Volve a intentalo" })
@@ -152,7 +177,7 @@ exports.usersLogin = async (req, res) => {
     }
 }
 
-//7. RECUPERAR CONTRASEÑA. COMPROBAMOS QUE USUARIO Y EMAIL COINCIDEN---------------------------------------------
+//7. RECUPERAR CONTRASEÑA. COMPROBAMOS QUE USUARIO Y EMAIL COINCIDEN---------------------------------
 exports.usersPasswordRecover = async (req, res) => {
     const errors = validationResult(req);
     console.log(errors)
@@ -183,3 +208,5 @@ exports.usersPasswordRecover = async (req, res) => {
         res.send({ "message": "Dedes incluír un Usuario e un EMail" })
     }
 }
+
+//8. SACAMOS ID Y SI ES ADMINISTRADOR O NO

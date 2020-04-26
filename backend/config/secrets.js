@@ -6,5 +6,6 @@ module.exports = {
     password: 'desarrollo',
     database: 'quefacernacosta',
     connectTimeout: 50000,
-    acquireTimeout: 50000
+    acquireTimeout: 50000,
+    jwt_clave: '7392381324070326KM'
 }
