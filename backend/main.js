@@ -19,6 +19,7 @@ const eventosController = require('./controllers/eventos.controller');
 const concellosController = require('./controllers/concellos.controller');
 const categoriasController = require('./controllers/categorias.controller');
 const middlewares = require('./middlewares/middelwares');
+const jwtcontrollers = require('./controllers/jwt.controllers');
 
 
 //Creamos servidor-----------------------------------------------------------------------------------------------
@@ -35,6 +36,7 @@ server.use(bodyParser.json());
 }));*/
 //PErmiter realizar llamadas desde Angular
 server.use(cookieParser());
+server.use(jwtcontrollers.checkToken);
 server.use(cors());
 
 
@@ -103,7 +105,7 @@ server.post('/eventos/new', [
     check('artista').not().isEmpty().isString().escape().trim(),
     check('descripcion').optional().isString().escape().trim(),
     check('prezo').optional().isString().escape().trim(),
-    check('imagen').optional().isString().escape().trim(),
+    check('imagen').optional().isString(),//.escape().trim(),
     check('fk_clasificacion').not().isEmpty().isNumeric().escape().trim(),
     check('fk_usuario').not().isEmpty().isNumeric().escape().trim(),
     check('publicacion').optional().isNumeric().escape().trim()
@@ -128,7 +130,7 @@ check('hora').optional().isString().escape().trim(),
 check('artista').not().isEmpty().isString().escape().trim(),
 check('descripcion').optional().isString().escape().trim(),
 check('prezo').optional().isString().escape().trim(),
-check('imagen').optional().isString().escape().trim(),
+check('imagen').optional().isString().escape(),//.trim(),
 check('fk_clasificacion').not().isEmpty().isNumeric().escape().trim(),
 check('fk_usuario').not().isEmpty().isNumeric().escape().trim(),
 check('publicacion').optional().isNumeric().escape().trim()
