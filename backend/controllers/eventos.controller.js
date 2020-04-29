@@ -162,3 +162,31 @@ exports.filtrarEventos = async (req, res) => {
         res.send(error)
     }
 }
+
+//7. DEVUELVE TODOS LOS EVENTOS CON FECHA IGUAL O SUPERIOR A HOY
+exports.listaEventosAct = async (req, res) => {
+    try {
+        const resultados = await eventosModel.obtenerTodosEventosAct();
+        //console.log(resultados);
+        res.send(resultados)
+
+    } catch (error) {
+        console.log(`Error en eventos.controller ${error}`);
+        res.send(error)
+
+    }
+}
+
+//8. DEVUELVE TODOS LOS EVENTOS CON FECHA IGUAL  A HOY
+exports.listaEventosToday = async (req, res) => {
+    try {
+        const resultados = await eventosModel.obtenerTodosEventosToday();
+        //console.log(resultados);
+        res.send(resultados)
+
+    } catch (error) {
+        console.log(`Error en eventos.controller ${error}`);
+        res.send(error)
+
+    }
+}

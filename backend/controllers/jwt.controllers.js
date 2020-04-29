@@ -9,7 +9,7 @@ const secrets = require('../config/secrets');
 
 exports.checkToken = (req, res, next) => {//1
     //Definimos los endpoints sobre los que no queremos que se haga ningún tipo de comprobación del token
-    if (req.path === '/users/login' || req.path === '/users/new' || req.path === '/eventos/all' || req.path === '/eventos/filtrar') {//2
+    if (req.path === '/users/login' || req.path === '/users/new' || req.path === '/eventos/all' || req.path === '/eventos/filtrar' || req.path === '/eventos/all/active' || req.path === '/eventos/all/today') {//2
         //Si el endpoint de la llamada coincide con alguno de los anteriores no tienes que estar logueado para acceder
         next()
     }//2

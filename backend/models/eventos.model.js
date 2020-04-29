@@ -26,7 +26,7 @@ exports.obtenerTodosEventos = () => {
 
     return new Promise(async (resolve, reject) => {
         try {
-            const todosEventos = await connection.query("SELECT * FROM eventos")
+            const todosEventos = await connection.query("SELECT * FROM eventos e, concellos c, categorias s WHERE e.fk_concellos=c.id && e.fk_clasificacion=s.id")
             resolve(todosEventos);
         } catch (error) {
             reject(error);
@@ -122,3 +122,32 @@ exports.filtrarEventos = ({ nombreEvento = null, fk_concellos = null, fecha_in =
         }
     })
 }
+
+//7. DEVUELVE TODOS LOS EVENTOS CON FECHA IGUAL O SUPERIOR A HOY
+exports.obtenerTodosEventosAct = () => {
+
+    return new Promise(async (resolve, reject) => {
+        try {
+            const todosEventosAct = await connection.query("SELECT * FROM eventos e, concellos c, categorias s WHERE e.fk_concellos=c.id && e.fk_clasificacion=s.id && e.fecha_in >= DATE(NOW())")
+            resolve(todosEventosAct);
+        } catch (error) {
+            reject(error);
+        }
+    })
+
+}
+
+//8. DEVUELVE TODOS LOS EVENTOS CON FECHA IGUAL A HOY
+exports.obtenerTodosEventosToday = () => {
+
+    return new Promise(async (resolve, reject) => {
+        try {
+            const todosEventosToday = await connection.query("SELECT * FROM eventos e, concellos c, categorias s WHERE e.fk_concellos=c.id && e.fk_clasificacion=s.id && e.fecha_in = DATE(NOW())")
+            resolve(todosEventosToday);
+        } catch (error) {
+            reject(error);
+        }
+    })
+
+}
+

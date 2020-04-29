@@ -1,7 +1,7 @@
 //Configuramos acceso a base de datos
 
 module.exports = {
-    host: 'hl765.dinaserver.com',
+    host: 'hl764.dinaserver.com',
     user: 'desarrollo00',
     password: 'desarrollo',
     database: 'quefacernacosta',

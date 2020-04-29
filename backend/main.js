@@ -136,15 +136,19 @@ check('fk_usuario').not().isEmpty().isNumeric().escape().trim(),
 check('publicacion').optional().isNumeric().escape().trim()
 ], eventosController.modificarEvento);
 
-//5. EVENTOS.DELETE ==BORRA UN EVENTO----------------------------------------------------------------------------
+//5. EVENTOS.DELETE ==BORRA UN EVENTO---------------------------------------------------------------------
 server.delete('/eventos/delete/:idEvento', eventosController.borrarEvento);
 
-//6. EVENTOS PUT FILTRADOS
-
+//6. EVENTOS PUT FILTRADOS--------------------------------------------------------------------------------
 server.put('/eventos/filtrar', eventosController.filtrarEventos);
 
+//7. DEVUELVE TODOS LOS EVENTOS CON FECHA IGUAL O SUPERIOR A HOY------------------------------------------
+server.get('/eventos/all/active', eventosController.listaEventosAct);
 
-//-----------------##-TABLA CONCELLOS-##------------------------------------------------------------------------
+//8. DEVUELVE TODOS LOS EVENTOS CON FECHA IGUAL  A HOY------------------------------------------
+server.get('/eventos/all/today', eventosController.listaEventosToday);
+
+//-----------------##-TABLA CONCELLOS-##------------------------------------------------------------------
 
 //1. DEVUELVE TODOS LOS CONCELLOS
 server.get('/concellos/all', concellosController.listaConcellos);
