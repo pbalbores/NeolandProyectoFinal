@@ -1,4 +1,16 @@
+/*FOOTER*/
 .footer {
-  background-color: black;
-  color: green
+  background-color: #636e72;
+  color: #ffff;
+  padding: 10px;
+}
+
+.footer-down {
+  background-color: #636e72;
+  color: #ffff;
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
 }

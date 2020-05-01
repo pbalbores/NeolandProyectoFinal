@@ -1,1 +1,38 @@
-<p>user-register works!</p>
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="left col-12 col-md-5 registerForm">
+            <div class="tituloSeccion">
+                <h2>Rexistro de usuario</h2>
+            </div>
+            <form class="form-group col-12 col-md-9" (ngForm)="registerForm" #registerForm="ngForm"
+                (ngSubmit)="submitForm()">
+                <label class="equitetaDeFormulario" for="userName">
+                    Nome de usuario
+                </label>
+                <input type="text" class="form-control" placeholder="Nome de usuario" [(ngModel)]="nombreUsuario"
+                    name="username"><br>
+                <label class="equitetaDeFormulario" for="password">
+                    Email
+                </label><input type="password" class="form-control" placeholder="Email" [(ngModel)]="password"
+                    name="password"> <br>
+                <label class="equitetaDeFormulario" for="email">
+                    Contrasinal
+                </label><input type="email" class="form-control" placeholder="Contrasinal" [(ngModel)]="email"
+                    name="email"><br>
+                <button type="submit">Enviar</button>
+            </form>
+            <div class="col-7 col-md-9 text">
+                <p>Xa estás rexistrado? Incia sesión</p>
+            </div>
+            <div class="col-12 col-md-3">
+                <app-carrousel></app-carrousel>
+                <!-- <div class="right col-12 col-md-7"><img src="../../assets/images/register.jpg" width="900"
+                alt="imagen_concierto"></div>-->
+            </div>
+
+
+
+
+
+        </div>

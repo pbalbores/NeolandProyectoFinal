@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EventosAllService } from '../services/eventos-all.service';
 
 @Component({
   selector: 'app-eventos-filter',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventosFilterComponent implements OnInit {
 
-  constructor() { }
+  constructor(private EventosAllService: EventosAllService) { }
+
+  eventos: object;
 
   ngOnInit(): void {
+    /*  this.EventosAllService.EventosFiltrados()
+        .then((data) => {
+          this.eventos = data;
+          console.log(data)
+        })*/
   }
 
 }

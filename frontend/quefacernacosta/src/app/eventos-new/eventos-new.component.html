@@ -1,17 +1,98 @@
-<h1>Envíanos un novo evento</h1>
-<form (ngForm)="submitEvento" #EventoAddForm="ngForm" (ngSubmit)="submitEvento()">
-    Nome do evento: <input type="text" [(ngModel)]="nombreEvento" name="nombreEvento">
-    Localización 1:<input type="text" [(ngModel)]="location1" name="location1">
-    Concello:<input type="number" [(ngModel)]="fk_concellos" name="concello">
-    Localización 2: <input type="text" [(ngModel)]="localizacion2" name="localizacion2">
-    Data de incio: <input type="date" [(ngModel)]="fecha_in" name="fecha_in">
-    Data de finalización: <input type="date" [(ngModel)]="fecha_fin" name="fecha_fin">
-    Hora: <input type="text" [(ngModel)]="hora" name="hora">
-    Artista: <input type="text" [(ngModel)]="artista" name="artista">
-    Descrición do evento: <input type="text" [(ngModel)]="descripcion" name="descripcion">
-    Prezo: <input type="text" [(ngModel)]="prezo" name="prezo">
-    Imaxe: <input type="text" [(ngModel)]="imagen" name="imagen">
-    Clasificación: <input type="number" [(ngModel)]="fk_clasificacion" name="clasificacion">
-    Usuario: <input type="number" [(ngModel)]="fk_usuario" name="usuario">
-    <button type="submit">Envíar evento</button>
-</form>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-md-5 ">
+            <div class="tituloSeccion">
+                <h2>Enviar novo evento</h2>
+            </div>
+            <div>
+                <form (ngForm)="submitEventoForm" #submitEventoForm="ngForm" (ngSubmit)="submitEvento()">
+                    <div class="form-group">
+                        <div class="form-group col-12 col-md-10">
+                            <label for="userName">Nome do evento</label><br>
+                            <input type="text" [(ngModel)]="nombreEvento" name="nombreEvento">
+                        </div>
+                        <div class="form-group col-12 col-md-9">
+                            <label for="exampleInputLocation1">Localización 1</label><br>
+                            <input type="text" [(ngModel)]="location1" name="location1">
+                        </div>
+                        <div class="form-group col-12 col-md-9">
+                            <label for="exampleInputConcello">Concello</label><br>
+                            <input type="number" [(ngModel)]="fk_concellos" name="concello">
+                        </div>
+                        <div class="form-group col-12 col-md-9">
+                            <label for="exampleInputLocalizacion2">Localización 2</label><br>
+                            <input type="text" [(ngModel)]="localizacion2" name="localizacion2">
+                        </div>
+                        <div class="form-group col-12 col-md-9">
+                            <label for="exampleInputFecha_in">Data de incio</label><br>
+                            <input type="date" [(ngModel)]="fecha_in" name="fecha_in">
+                        </div>
+                        <div class="form-group col-12 col-md-9">
+                            <label for="exampleInputFecha_fin">Data de finalización</label><br>
+                            <input type="date" [(ngModel)]="fecha_fin" name="fecha_fin">
+                        </div>
+                        <div class="form-group col-12 col-md-9">
+                            <label for="exampleInputHora">Hora</label><br>
+                            <input type="text" [(ngModel)]="hora" name="hora">
+                        </div>
+                        <div class="form-group col-12 col-md-9">
+                            <label for="exampleInputArtista">Artista</label><br>
+                            <input type="text" [(ngModel)]="artista" name="artista">
+                        </div>
+                        <div class="form-group col-12 col-md-9">
+                            <label for="exampleInputDescricion">Descrición do evento</label><br>
+                            <input type="text" [(ngModel)]="descripcion" name="descripcion">
+                        </div>
+                        <div class="form-group col-12 col-md-9">
+                            <label for="exampleInputPrezo">Prezo</label><br>
+                            <input type="text" [(ngModel)]="prezo" name="prezo">
+                        </div>
+                        <div class="form-group col-12 col-md-9">
+                            <label for="exampleInputImaxe">Imaxe</label><br>
+                            <input type="text" [(ngModel)]="imagen" name="imagen">
+                        </div>
+                        <div class="form-group col-12 col-md-9">
+                            <label for="exampleInputClasificacion">Clasificacion</label><br>
+                            <input type="number" [(ngModel)]="fk_clasificacion" name="clasificacion">
+                        </div>
+                        <div class="form-group col-12 col-md-9">
+                            <label for="exampleInputClasificacion">Usuario</label><br>
+                            <input type="number" [(ngModel)]="fk_usuario" name="usuario">
+                        </div>
+                        <button type="submit">Envíar evento</button>
+                    </div>
+                </form>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- <div class="right col-12 col-md-7"><img src="../../assets/images/login.jpg" width="900" alt="imagen_carrera">
+    </div>-->
+        <div>
+            <p>{{eventoEngadido.message}}</p><br>
+        </div>
+
+        <div *ngFor='let evento of datosEventoEngadido'>
+            <div class="card eventCard" style="width: 18rem;">
+                <div class="card-header">
+                    <h6>{{evento.categoria}}</h6>
+                </div>
+                <img src="{{evento.imagen}}" style="height:200px ;" class="card-img-top" alt="{{evento.nombreEvento}}">
+                <div class="card-body">
+                    <h5 class="card-title">{{evento.nombreEvento}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{evento.artista}}</h6>
+                    <p class="card-text"> <b>Lugar: </b>{{evento.concello}}<br>
+                        <b>Data: </b> {{evento.fecha_in|date:"EEE, d  MMM" }} <b>Hora: </b> {{evento.fecha_in|date:"hh:mm"
+                              //Utilizamos un pipe para darle formato a la hora
+                                                                    }}</p>
+
+                    <a href="#" class="btn btn-primary">Boton especial</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

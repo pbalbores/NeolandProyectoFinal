@@ -1,1 +1,30 @@
-<p>user-login works!</p>
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="left col-12 col-md-5 registerForm">
+            <div class="tituloSeccion">
+                <h2>Login</h2>
+            </div>
+            <form class="form-group col-12 col-md-9" (ngForm)="loginForm" #loginForm="ngForm" (ngSubmit)="sendForm()">
+                <label class="equitetaDeFormulario" for="userName">
+                    Nome de usuario
+                </label>
+                <input type="text" class="form-control" id="userName" placeholder="Nome de usuario"
+                    [(ngModel)]="nombreUsuario" name="username">
+                <label class="equitetaDeFormulario" for="password">Contrasinal</label>
+                <input type="password" class="form-control" id="password" placeholder="Contrasinal"
+                    [(ngModel)]="password" name="password ">
+                <div class="col-7 col-md-9 ">
+                    <p>Esqueciches o contrasinal? Recupérao</p>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+
+            <div class="col-7 col-md-9 text">
+                <p>Non estás rexistrado? Rexístrate</p>
+            </div>
+        </div>
+        <div class="right col-12 col-md-7"><img src="../../assets/images/login.jpg" width="900" alt="imagen_carrera">
+        </div>
+    </div>
+</div>

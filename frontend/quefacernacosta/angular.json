@@ -3,13 +3,9 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "quefacernacosta": {
+    "queFacerNaCosta": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "sass"
-        }
-      },
+      "schematics": {},
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -17,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/quefacernacosta",
+            "outputPath": "dist/queFacerNaCosta",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -28,7 +24,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.sass",
+              "src/styles.css",
               "./node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": []
@@ -64,18 +60,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "quefacernacosta:build"
+            "browserTarget": "queFacerNaCosta:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "quefacernacosta:build:production"
+              "browserTarget": "queFacerNaCosta:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "quefacernacosta:build"
+            "browserTarget": "queFacerNaCosta:build"
           }
         },
         "test": {
@@ -90,7 +86,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.sass"
+              "src/styles.css"
             ],
             "scripts": []
           }
@@ -112,16 +108,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "quefacernacosta:serve"
+            "devServerTarget": "queFacerNaCosta:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "quefacernacosta:serve:production"
+              "devServerTarget": "queFacerNaCosta:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "quefacernacosta"
+  "defaultProject": "queFacerNaCosta"
 }

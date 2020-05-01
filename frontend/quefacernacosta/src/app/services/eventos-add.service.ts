@@ -38,10 +38,9 @@ export class EventosAddService {
       imagen: imagen,
       fk_clasificacion: fk_clasificacion,
       fk_usuario: fk_usuario
+    }).subscribe((responseAPI) => {
+      console.log(responseAPI)
+      console.log(nombreEvento)
     })
-
-      .subscribe((responseAPI) => {
-        console.log(responseAPI)
-      })
   }
 }

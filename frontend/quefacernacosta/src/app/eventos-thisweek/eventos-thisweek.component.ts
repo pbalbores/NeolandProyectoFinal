@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-eventos-thisweek',
   templateUrl: './eventos-thisweek.component.html',
@@ -10,6 +11,8 @@ export class EventosThisweekComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
+
   }
 
 }

@@ -28,21 +28,23 @@
 <!--FORMULARIO-->
 <!--Hai que implementalo. Mentres usamos un por defecto de Bootstrap-->
 <div class="container formulario">
-    <form>
+    <form (ngForm)="eventForm" #eventForm="ngForm" (ngSubmit)="sendData()">
         <div class="form-row">
             <div class="col-12 col-md-5">
-                <input type="text" class="form-control" placeholder="Que tipo de evento buscas?">
+                <input type="text" class="form-control" placeholder="Que tipo de evento buscas?"
+                    [(ngModel)]="categorias" name="categorias">
             </div>
             <div class="col-12 col-md-4">
-                <input type="text" class="form-control" placeholder="Onde?">
+                <input type="text" class="form-control" placeholder="Onde?" [(ngModel)]="concellos" name="concellos">
             </div>
-            <div class="col-12 col-md-1"> <button type="button" class="btn btn-primary boton">Buscar</button>
+            <div class="col-12 col-md-1"> <button type="submit" class="btn btn-primary boton">Buscar</button>
             </div>
         </div>
     </form>
 </div>
 <!--FIN FORMULARIO-->
 <!--MENU FILTRADO -->
+<!--
 <div class="container-fluid menuBotones">
     <div class="row">
         <div class="col-12 col-md-3 textoBotones2">
@@ -55,5 +57,29 @@
         </div>
     </div>
 </div>
-
+-->
 <!--FIN MENU FILTRADO -->
+
+
+<div class="card">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="navTitle">
+                <h3>Que queres facer...</h3>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Destacados</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Hoxe</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Esta semana</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Con nenos</a>
+            </li>
+        </ul>
+    </div>
+    <!-- <app-eventos-all></app-eventos-all>-->
+</div>

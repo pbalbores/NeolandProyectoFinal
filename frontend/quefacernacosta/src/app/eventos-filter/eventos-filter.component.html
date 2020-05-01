@@ -1,1 +1,24 @@
-<p>eventos-filter works!</p>
+<div class="container-fluid ">
+
+
+    <div class="card-group">
+        <div *ngFor='let evento of eventos'>
+            <div class="card eventCard" style="width: 18rem;">
+                <div class="card-header">
+                    <h6>{{evento.categoria}}</h6>
+                </div>
+                <img src="{{evento.imagen}}" style="height:200px ;" class="card-img-top" alt="{{evento.nombreEvento}}">
+                <div class="card-body">
+                    <h5 class="card-title">{{evento.nombreEvento}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{evento.artista}}</h6>
+                    <p class="card-text"> <b>Lugar: </b>{{evento.concello}}<br>
+                        <b>Data: </b> {{evento.fecha_in|date:"EEE, d  MMM" }} <b>Hora: </b> {{evento.fecha_in|date:"hh:mm"
+                  //Utilizamos un pipe para darle formato a la hora
+                                                        }}</p>
+
+                    <a href="#" class="btn btn-primary">Boton especial</a>
+                </div>
+            </div>
+
+        </div>
+    </div>

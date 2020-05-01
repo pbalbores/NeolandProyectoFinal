@@ -1,0 +1,20 @@
+.left {
+  background-color: #f8f9fa;
+
+}
+
+.right {
+
+  background-color: #f8f9fa;
+}
+
+.tituloSeccion {
+  color: #0984e3;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.text {
+  padding-top: 15px;
+  text-align: center;
+}
