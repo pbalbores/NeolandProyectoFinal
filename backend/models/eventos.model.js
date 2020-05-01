@@ -95,23 +95,23 @@ exports.borrarEvento = (idEvento) => {
     })
 }
 
-//6. FILTRA EVENTOS-----------------------------------------------------------------------------------------
+//6. FILTRA EVENTOS--------------------------------------------------------------------------------------
 exports.filtrarEventos = ({ nombreEvento = null, fk_concellos = null, fecha_in = null, fecha_fin = fecha_in, artista = null, fk_clasificacion = null }) => {
     return new Promise(async (resolve, reject) => {
         let sql = 'SELECT * FROM `eventos` WHERE 1=1 ';
 
         if (nombreEvento != null) {
-            sql += `AND nombreEvento="${nombreEvento}"`
+            sql += ` AND nombreEvento="${nombreEvento}"`
         } if (fk_concellos != null) {
-            sql += `AND fk_concellos=${fk_concellos}`
+            sql += ` AND fk_concellos=${fk_concellos}`
         } if (fecha_in != null) {
-            sql += `AND fecha_in="${fecha_in}"`
+            sql += ` AND fecha_in="${fecha_in}"`
         } if (fecha_fin != null) {
-            sql += `AND fecha_fin="${nombreEvento}"`
+            sql += ` AND fecha_fin="${nombreEvento}"`
         } if (artista != null) {
-            sql += `AND artista="${artista}"`
+            sql += ` AND artista="${artista}"`
         } if (fk_clasificacion != null) {
-            sql += `AND fk_clasificacion="${fk_clasificacion}"`
+            sql += ` AND fk_clasificacion="${fk_clasificacion}"`
         }
         try {
             const result = await connection.query(sql);

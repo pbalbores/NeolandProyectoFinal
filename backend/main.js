@@ -28,6 +28,10 @@ const server = express();
 //Midelwares-----------------------------------------------------------------------------------------------------
 server.use(helmet());
 // Configurar cabeceras y cors
+server.use((req, res, next) => {
+    res.header("Access-Control-Allow-Credentials", true);
+    next();
+})
 
 //Permite que el FrontEnd realice llamadas POST y PUT
 server.use(bodyParser.json());
@@ -37,7 +41,10 @@ server.use(bodyParser.json());
 //PErmiter realizar llamadas desde Angular
 server.use(cookieParser());
 server.use(jwtcontrollers.checkToken);
-server.use(cors());
+server.use(cors({
+    "origin": "http://localhost:4200"
+}));
+
 
 
 //Creamos servidor estático-------------------------------------------------.------------------------------------
