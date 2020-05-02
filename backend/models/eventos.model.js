@@ -20,7 +20,7 @@ exports.crearEvento = (nombreEvento, location1, fk_concellos, localizacion2, fec
 }
 
 
-//2.EVENTOS.GET ==DEVUELVE TODOS LOS EVENTOS---------------------------------------------------------------------
+//2.EVENTOS.GET ==DEVUELVE TODOS LOS EVENTOS FILTRANDO POR CATEGORIAS Y POR CONCELLOS---------------------
 
 exports.obtenerTodosEventos = () => {
 
@@ -102,20 +102,23 @@ exports.borrarEvento = (idEvento) => {
 //6. FILTRA EVENTOS--------------------------------------------------------------------------------------
 exports.filtrarEventos = ({ nombreEvento = null, fk_concellos = null, fecha_in = null, fecha_fin = fecha_in, artista = null, fk_clasificacion = null }) => {
     return new Promise(async (resolve, reject) => {
-        let sql = 'SELECT * FROM `eventos` WHERE 1=1 ';
+
+        let sql = 'SELECT * FROM eventos e,  concellos c, categorias s WHERE 1=1 ';
 
         if (nombreEvento != null) {
-            sql += ` AND nombreEvento="${nombreEvento}"`
+            sql += ` && nombreEvento="${nombreEvento}" `
         } if (fk_concellos != null) {
-            sql += ` AND fk_concellos=${fk_concellos}`
+            sql += ` && fk_concellos=${fk_concellos} `
         } if (fecha_in != null) {
-            sql += ` AND fecha_in="${fecha_in}"`
+            sql += ` && fecha_in="${fecha_in}" `
         } if (fecha_fin != null) {
-            sql += ` AND fecha_fin="${nombreEvento}"`
+            sql += ` && fecha_fin="${nombreEvento}" `
         } if (artista != null) {
-            sql += ` AND artista="${artista}"`
-        } if (fk_clasificacion != null) {
-            sql += ` AND fk_clasificacion="${fk_clasificacion}"`
+            sql += ` && artista="${artista}" `
+        } if (fk_clasificacion != null || fk_clasificacion != undefined) {
+            sql += ` && fk_clasificacion="${fk_clasificacion}" `
+        } if (sql != null) {
+            sql += `&& e.fk_concellos=c.id && e.fk_clasificacion=s.id && e.fecha_in >= DATE(NOW())`
         }
         try {
             const result = await connection.query(sql);
@@ -125,6 +128,7 @@ exports.filtrarEventos = ({ nombreEvento = null, fk_concellos = null, fecha_in =
             reject(error)
         }
     })
+
 }
 
 //7. DEVUELVE TODOS LOS EVENTOS CON FECHA IGUAL O SUPERIOR A HOY
