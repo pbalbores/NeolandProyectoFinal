@@ -1,61 +1,73 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12 col-md-5 ">
+        <div class="col-12 col-md-6 left">
             <div class="tituloSeccion">
                 <h2>Enviar novo evento</h2>
             </div>
             <div>
                 <form (ngForm)="submitEventoForm" #submitEventoForm="ngForm" (ngSubmit)="submitEvento()">
                     <div class="form-group">
-                        <div class="form-group col-12 col-md-10">
+                        <div class="form-group col-12">
                             <label for="userName">Nome do evento</label><br>
                             <input type="text" [(ngModel)]="nombreEvento" name="nombreEvento">
                         </div>
-                        <div class="form-group col-12 col-md-9">
+                        <div class="form-group col-12">
+                            <label for="exampleInputConcello">Concello</label><br>
+                            <!-- <input type="number" [(ngModel)]="fk_concellos" name="concello">-->
+                            <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="fk_concellos"
+                                name="concellos">
+                                <option *ngFor='let concello of datosConcellos' value="{{concello.id}}">
+                                    {{concello.concello}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-12">
                             <label for="exampleInputLocation1">Localización 1</label><br>
                             <input type="text" [(ngModel)]="location1" name="location1">
                         </div>
-                        <div class="form-group col-12 col-md-9">
-                            <label for="exampleInputConcello">Concello</label><br>
-                            <input type="number" [(ngModel)]="fk_concellos" name="concello">
-                        </div>
-                        <div class="form-group col-12 col-md-9">
+
+                        <div class="form-group ">
                             <label for="exampleInputLocalizacion2">Localización 2</label><br>
                             <input type="text" [(ngModel)]="localizacion2" name="localizacion2">
                         </div>
-                        <div class="form-group col-12 col-md-9">
+                        <div class="form-group">
                             <label for="exampleInputFecha_in">Data de incio</label><br>
                             <input type="date" [(ngModel)]="fecha_in" name="fecha_in">
                         </div>
-                        <div class="form-group col-12 col-md-9">
+                        <div class="form-group ">
                             <label for="exampleInputFecha_fin">Data de finalización</label><br>
                             <input type="date" [(ngModel)]="fecha_fin" name="fecha_fin">
                         </div>
-                        <div class="form-group col-12 col-md-9">
+                        <div class="form-group ">
                             <label for="exampleInputHora">Hora</label><br>
                             <input type="text" [(ngModel)]="hora" name="hora">
                         </div>
-                        <div class="form-group col-12 col-md-9">
+                        <div class="form-group ">
                             <label for="exampleInputArtista">Artista</label><br>
                             <input type="text" [(ngModel)]="artista" name="artista">
                         </div>
-                        <div class="form-group col-12 col-md-9">
+                        <div class="form-group ">
                             <label for="exampleInputDescricion">Descrición do evento</label><br>
                             <input type="text" [(ngModel)]="descripcion" name="descripcion">
                         </div>
-                        <div class="form-group col-12 col-md-9">
+                        <div class="form-group ">
                             <label for="exampleInputPrezo">Prezo</label><br>
                             <input type="text" [(ngModel)]="prezo" name="prezo">
                         </div>
-                        <div class="form-group col-12 col-md-9">
+                        <div class="form-group ">
                             <label for="exampleInputImaxe">Imaxe</label><br>
                             <input type="text" [(ngModel)]="imagen" name="imagen">
                         </div>
-                        <div class="form-group col-12 col-md-9">
+                        <div class="form-group ">
                             <label for="exampleInputClasificacion">Clasificacion</label><br>
-                            <input type="number" [(ngModel)]="fk_clasificacion" name="clasificacion">
+                            <!--<input type="number" [(ngModel)]="fk_clasificacion" name="clasificacion">-->
+                            <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="fk_clasificacion"
+                                name="clasificacion">
+                                <option *ngFor='let categoria of datosCategorias' value="{{categoria.id}}">
+                                    {{categoria.categoria}}</option>
+
+                            </select>
                         </div>
-                        <div class="form-group col-12 col-md-9">
+                        <div class="form-group col-12 ">
                             <label for="exampleInputClasificacion">Usuario</label><br>
                             <input type="number" [(ngModel)]="fk_usuario" name="usuario">
                         </div>
@@ -63,15 +75,51 @@
                     </div>
                 </form>
 
+            </div>
+            <div class="eventInfo col-12 col-md-6 right">
+                <div *ngFor='let evento of datosEventoEngadido'>
+                    <div class="alert alert-success mensajeEventoCreado" role="alert">
+                        <!--ENGADIMOS UNHA MENSAXE QUE INFORMA DE QUE O EVENTO FOI ENGADIDO E MOSTRAMOS A MENSAXE QUE DEVOLVE O SERVIDOR-->
+                        <h4 class="alert-heading">Parabéns! O evento foi engadido de maneira correcta na nosa base de
+                            datos.
+                        </h4>
+                        <p>{{eventoEngadido.message}}</p>
+                        <hr>
+                        <p class="mb-0">Moitas grazas por colaborar con QueFacerNacosta.</p>
+                    </div>
+                    <!--PINTAMOS DATOS DO EVENTO ENGADIDO-->
+                    <div class="col-12 datosEventoCreado">
 
+                        <div class="card eventCard" style="width: 100%;">
+                            <div class="card-header">
+                                <h6>DATOS DO EVENTO</h6>
+                            </div>
+                            <img src="{{evento.imagen}}" style="width:100% ;" class="card-img-top"
+                                alt="{{evento.nombreEvento}}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{evento.nombreEvento}}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">{{evento.artista}}</h6>
+                                <h6 class="card-subtitle mb-2 text-muted"><b>{{evento.categoria}}</b></h6>
+                                <p class="card-text"> <b>Lugar: </b>{{evento.concello}}<br>
+                                    {{evento.location1}}<br>
+                                    {{evento.localizacion2}}<br>
+                                    <b>Data: </b> {{evento.fecha_in|date:"EEE, d  MMM" }} <br>
+                                    <b>Data Finalización:</b>{{evento.fecha_fin|date:"EEE, d  MMM" }}<br>
+                                    <b>Hora: </b> {{evento.fecha_in|date:"hh:mm"}}<br>
+                                    <b>Descrición do evento: </b>{{evento.descripcion}}<br>
+                                    <b>Prezo:</b>{{evento.prezo}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
 
-        </div>
 
-
-        <!-- <div class="right col-12 col-md-7"><img src="../../assets/images/login.jpg" width="900" alt="imagen_carrera">
+            <!-- <div class="right col-12 col-md-7"><img src="../../assets/images/login.jpg" width="900" alt="imagen_carrera">
     </div>-->
-        <div>
+            <!--  <div>
             <p>{{eventoEngadido.message}}</p><br>
         </div>
 
@@ -94,5 +142,5 @@
             </div>
         </div>
 
-    </div>
-</div>
+    </div>-->
+        </div>

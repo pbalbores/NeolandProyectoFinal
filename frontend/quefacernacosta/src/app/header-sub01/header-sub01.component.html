@@ -31,11 +31,22 @@
     <form (ngForm)="eventForm" #eventForm="ngForm" (ngSubmit)="sendData()">
         <div class="form-row">
             <div class="col-12 col-md-5">
-                <input type="text" class="form-control" placeholder="Que tipo de evento buscas?"
-                    [(ngModel)]="categorias" name="categorias">
+                <label for="exampleInputClasificacion ">Que queres facer?</label><br>
+                <!--<input type="number" [(ngModel)]="fk_clasificacion" name="clasificacion">-->
+                <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="categorias"
+                    name="clasificacion">
+                    <option value=""></option>
+                    <option *ngFor='let categoria of datosCategorias' value="{{categoria.id}}">
+                        {{categoria.categoria}}</option>
+                </select>
             </div>
             <div class="col-12 col-md-4">
-                <input type="text" class="form-control" placeholder="Onde?" [(ngModel)]="concellos" name="concellos">
+                <label for="exampleInputClasificacion ">Onde?</label><br>
+                <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="concellos" name="concellos">
+                    <option value=""></option>
+                    <option *ngFor='let concello of datosConcellos' value="{{concello.id}}">
+                        {{concello.concello}}</option>
+                </select>
             </div>
             <div class="col-12 col-md-1"> <button type="submit" class="btn btn-primary boton">Buscar</button>
             </div>
@@ -80,6 +91,25 @@
                 <a class="nav-link" href="#">Con nenos</a>
             </li>
         </ul>
-    </div>
-    <!-- <app-eventos-all></app-eventos-all>-->
-</div>
+        <div class="card-group">
+            <div *ngFor='let evento of eventos'>
+                <div class="card eventCard" style="width: 18rem;">
+                    <div class="card-header">
+                        <h6>{{evento.categoria}}</h6>
+                    </div>
+                    <img src="{{evento.imagen}}" style="height:200px ;" class="card-img-top"
+                        alt="{{evento.nombreEvento}}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{evento.nombreEvento}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{evento.artista}}</h6>
+                        <p class="card-text"> <b>Lugar: </b>{{evento.concello}}<br>
+                            <b>Data: </b> {{evento.fecha_in|date:"EEE, d  MMM" }} <b>Hora: </b> {{evento.fecha_in|date:"hh:mm"
+                          //Utilizamos un pipe para darle formato a la hora
+                                                                }}</p>
+
+                        <a href="#" class="btn btn-primary">Boton especial</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>

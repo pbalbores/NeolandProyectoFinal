@@ -34,6 +34,9 @@ export class HeaderSub01Component implements OnInit {
 
   eventos: any;
 
+  datosConcellos: any;
+  datosCategorias: any;
+
   sendData() {
     console.log(`Concello: ${this.concellos} Categoría: ${this.categorias}`)
     // console.log(`Datos búsqueda antes de meterle nada ${this.datosBusqueda}`)
@@ -56,10 +59,10 @@ export class HeaderSub01Component implements OnInit {
     return this._http.put('http://localhost:3000/eventos/filtrar',
       {
         "fk_concellos": this.concellos,
-        "fk_categorias": this.categorias
+        "fk_clasificacion": this.categorias
       }
     )
-      //.toPromise()
+
       .subscribe(
         (data) => { // Success
 
@@ -72,8 +75,45 @@ export class HeaderSub01Component implements OnInit {
       )
   }
 
-  ngOnInit(): void {
 
+  //LLAMADAS A API PARA OBTENER DATOS DE LAS TABLAS CONCELLOS Y CATEGORIAS
+
+  getConcellosDatos() {
+    return this._http.get(`http://localhost:3000/concellos/all`).subscribe(
+      (data) => { // Success
+
+        this.datosConcellos = data;
+        console.log(data)
+        console.log(`Datos Concellos: ${this.datosConcellos}`)
+
+
+      },
+      (error) => {
+        console.error(error);
+      }
+    )
+
+  }
+
+  getCategoriasDatos() {
+    return this._http.get(`http://localhost:3000/categorias/all`).subscribe(
+      (data) => { // Success
+
+        this.datosCategorias = data;
+        console.log(data)
+      },
+      (error) => {
+        console.error(error);
+      }
+    )
+  }
+
+
+  ngOnInit(): void {
+    //Como queremos que las dos funciones de obtener datos de tablas CONCELLOS y CATEGORÍAS SE INICIEN AL CARGAR LA PÁGINA LAS INVOCAMOS AL INCIO
+
+    this.getConcellosDatos();
+    this.getCategoriasDatos();
 
 
   }

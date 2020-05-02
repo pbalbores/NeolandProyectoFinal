@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ReusablesService } from '../services/reusables.service';
 
 
 @Component({
@@ -10,7 +11,14 @@ import { HttpClient } from '@angular/common/http';
 export class EventosNewComponent implements OnInit {
 
   // En el Constructor inyectamos el Servicio que vamos a utilizar. Normalmente se importa solo en la parte superior
-  constructor(protected _http: HttpClient) { }
+  constructor(protected _http: HttpClient, private reusables: ReusablesService) { }
+
+  //Pasamos los datos de los nombres de los Concellos y de los nombres de las categorías
+
+
+
+
+
 
   nombreEvento: string;
   location1: string;
@@ -25,6 +33,9 @@ export class EventosNewComponent implements OnInit {
   imagen: string;
   fk_clasificacion: number;
   fk_usuario: number;
+
+  datosConcellos: any;
+  datosCategorias: any;
 
   eventoEngadido: any;
   datosEventoEngadido: any;
@@ -77,8 +88,57 @@ export class EventosNewComponent implements OnInit {
 
   }
 
+  //LLAMADAS A API PARA OBTENER DATOS DE LAS TABLAS CONCELLOS Y CATEGORIAS
 
-  ngOnInit(): void {
+  getConcellosDatos() {
+    return this._http.get(`http://localhost:3000/concellos/all`).subscribe(
+      (data) => { // Success
+
+        this.datosConcellos = data;
+        console.log(data)
+        console.log(`Datos Concellos: ${this.datosConcellos}`)
+
+
+      },
+      (error) => {
+        console.error(error);
+      }
+    )
+
   }
 
+  getCategoriasDatos() {
+    return this._http.get(`http://localhost:3000/categorias/all`).subscribe(
+      (data) => { // Success
+
+        this.datosCategorias = data;
+        console.log(data)
+      },
+      (error) => {
+        console.error(error);
+      }
+    )
+  }
+
+  ngOnInit(): void {
+
+
+    //Al inciar el componente llamamos a las funciónes del servicio REUSABLES que nos sacan los datos de los Concellos y de las Categorías
+    //Como no acaba de funcionar del todo bien, hacemos la llamada directamente
+
+    /*
+        this.reusables.getConcellosDatos();
+        this.reusables.getCategoriasDatos();
+    
+        this.datosConcellos = this.reusables.datosConcellos;
+        this.datosCategorias = this.reusables.datosCategorias;*/
+
+
+    //Como queremos que las dos funciones de obtener datos de tablas CONCELLOS y CATEGORÍAS SE INICIEN AL CARGAR LA PÁGINA LAS INVOCAMOS AL INCIO
+
+    this.getConcellosDatos();
+    this.getCategoriasDatos();
+
+
+  }
 }

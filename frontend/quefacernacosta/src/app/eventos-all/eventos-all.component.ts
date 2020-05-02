@@ -31,6 +31,7 @@ export class EventosAllComponent implements OnInit {
     this.EventosAllService.getEventosAll()
       .then((data) => {
         this.eventos = data;
+        console.log(`Eventos ${this.eventos}`)
       })
 
   }
