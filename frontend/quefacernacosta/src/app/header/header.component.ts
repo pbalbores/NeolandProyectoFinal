@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../services/users.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -9,7 +10,11 @@ import { UsersService } from '../services/users.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private user: UsersService) { }
+  constructor(private user: UsersService, private router: Router) { }
+
+  enviarEvento() {
+    this.router.navigateByUrl('eventos/new')
+  }
 
   logout() {
     this.user.logout()
