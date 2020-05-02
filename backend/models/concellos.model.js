@@ -4,7 +4,7 @@ const connection = require('./db.model');
 
 //------------------##-CRUD SOBRE TABLA CONCELLOS-##-------------------------------------------------------------
 
-//1. GET ALL--OBTENEMOS DATOS DE TODOS LOS CONCELLOS-------------------------------------------------------------
+//1. GET ALL--OBTENEMOS NOMBRE DE TODOS LOS CONCELLOS-------------------------------------------------------------
 exports.obtenerTodosConcellos = () => {
 
     return new Promise(async (resolve, reject) => {

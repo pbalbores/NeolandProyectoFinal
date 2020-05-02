@@ -39,7 +39,11 @@ exports.obtenerTodosEventos = () => {
 exports.getEventById = (id) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const eventData = await connection.query(`SELECT * FROM eventos WHERE id= ${id}`)
+            const eventData = await connection.query(
+
+                // SELECT * FROM eventos WHERE id= ${id}
+                ` SELECT * FROM eventos e, concellos c, categorias s WHERE e.id = ${id} && e.fk_concellos=c.id && e.fk_clasificacion=s.id
+            `)
             resolve(eventData)
         } catch (error) {
             console.log(error)
@@ -129,6 +133,7 @@ exports.obtenerTodosEventosAct = () => {
     return new Promise(async (resolve, reject) => {
         try {
             const todosEventosAct = await connection.query("SELECT * FROM eventos e, concellos c, categorias s WHERE e.fk_concellos=c.id && e.fk_clasificacion=s.id && e.fecha_in >= DATE(NOW())")
+
             resolve(todosEventosAct);
         } catch (error) {
             reject(error);
