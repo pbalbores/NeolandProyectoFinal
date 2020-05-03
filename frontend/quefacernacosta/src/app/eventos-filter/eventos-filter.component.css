@@ -1,0 +1,14 @@
+.imagenDeEvento {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+
+}
+
+.descricion {
+  padding-left: 10px;
+}
+
+.imagenLateral {
+  padding-bottom: 10px;
+}

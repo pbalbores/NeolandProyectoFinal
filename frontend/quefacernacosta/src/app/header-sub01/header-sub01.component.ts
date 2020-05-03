@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { EventosAllService } from '../services/eventos-all.service';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 @Component({
   selector: 'app-header-sub01',
@@ -10,11 +12,9 @@ import { HttpClient } from '@angular/common/http';
 export class HeaderSub01Component implements OnInit {
 
 
-  constructor(protected _http: HttpClient) { }
+  constructor(protected _http: HttpClient, private router: Router) { }
   /* PENDENTE:
-  1. Que no formulario se poidan seleccionar os concellos e as categorías pòlo seu nome
-  2. Que os nomes dos concellos e das categorías se transformen no seu número equivalente para pasrllo como valor a concellos e a categorias
-  3. Que se poida seleccionar só o concello, só a categoria ou os dous e funcione
+
   4. Ver como podemos exportar os datos da variable EVENTOS para mostralos noutro componente
   5. CONSULTAR PROFE. A maneira de implementar esta chamada en eventos.service
   */
@@ -39,22 +39,6 @@ export class HeaderSub01Component implements OnInit {
 
   sendData() {
     console.log(`Concello: ${this.concellos} Categoría: ${this.categorias}`)
-    // console.log(`Datos búsqueda antes de meterle nada ${this.datosBusqueda}`)
-
-    /* if (this.concellos != undefined && this.categorias != undefined) {
-    this.datosBusqueda = `{"fk_concellos":${this.concellos}, "fk_clasificacion":${this.categorias}}`
-    console.log(`Datos búsqueda si concellos y categorias tienen valores: ${this.datosBusqueda}`)
-  } else if (this.concellos != undefined) {
-    this.datosBusqueda = `{"fk_concellos": ${this.concellos}}`
-    console.log(`Datos búsqueda si concellos tiene valor: ${this.datosBusqueda}`)
-  } else if (this.categorias != undefined) {
-    this.datosBusqueda = `{"fk_clasificacion": ${this.categorias}}`
-    console.log(`Datos búsqueda si categorias tiene valor: ${this.datosBusqueda}`)
-  }
-
-  console.log(`Datos que se envían al servidor para realizar la búsqueda ${this.datosBusqueda}`)*/
-
-    //this.EventosAllService.EventosFiltrados(this.concellos, this.categorias)
 
     return this._http.put('http://localhost:3000/eventos/filtrar',
       {
@@ -106,8 +90,14 @@ export class HeaderSub01Component implements OnInit {
         console.error(error);
       }
     )
-  }
 
+
+  }
+  abrirPaginaEvento(register) {
+    console.log("abrir pagina evento activado")
+
+    this.router.navigateByUrl(register)
+  }
 
   ngOnInit(): void {
     //Como queremos que las dos funciones de obtener datos de tablas CONCELLOS y CATEGORÍAS SE INICIEN AL CARGAR LA PÁGINA LAS INVOCAMOS AL INCIO

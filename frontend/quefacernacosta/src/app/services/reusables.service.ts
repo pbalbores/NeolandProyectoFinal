@@ -35,6 +35,7 @@ export class ReusablesService {
 
   datosCategorias: any;
 
+
   //Llamada a la base de datos
 
   getCategoriasDatos() {
@@ -49,7 +50,6 @@ export class ReusablesService {
       }
     )
   }
-
 
 
 }

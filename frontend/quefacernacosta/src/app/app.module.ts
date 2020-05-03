@@ -23,6 +23,7 @@ import { EventosChildrenComponent } from './eventos-children/eventos-children.co
 import { UsersService } from './services/users.service';
 import { CarrouselComponent } from './carrousel/carrousel.component';
 import { UserIdComponent } from './user-id/user-id.component';
+import { UserIdAdminComponent } from './user-id-admin/user-id-admin.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { UserIdComponent } from './user-id/user-id.component';
     EventosChildrenComponent,
     CarrouselComponent,
     UserIdComponent,
+    UserIdAdminComponent,
   ],
   imports: [
     BrowserModule,

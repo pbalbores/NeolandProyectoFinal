@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ReusablesService } from '../services/reusables.service';
+import { Evento } from '../models/evento';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class EventosNewComponent implements OnInit {
   //Pasamos los datos de los nombres de los Concellos y de los nombres de las categorías
 
 
-
+  //evento: Array<Evento>;
 
 
 
