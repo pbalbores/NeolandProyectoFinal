@@ -100,11 +100,13 @@ exports.borrarEvento = (idEvento) => {
 }
 
 //6. FILTRA EVENTOS--------------------------------------------------------------------------------------
-exports.filtrarEventos = ({ nombreEvento = null, fk_concellos = null, fecha_in = null, fecha_fin = fecha_in, artista = null, fk_clasificacion = null }) => {
+exports.filtrarEventos = ({ id = null, nombreEvento = null, fk_concellos = null, fecha_in = null, fecha_fin = fecha_in, artista = null, fk_clasificacion = null }) => {
     return new Promise(async (resolve, reject) => {
 
         let sql = 'SELECT * FROM eventos e,  concellos c, categorias s WHERE 1=1 ';
-
+        if (id != null) {
+            sql += ` && e.id="${id}" `
+        }
         if (nombreEvento != null) {
             sql += ` && nombreEvento="${nombreEvento}" `
         } if (fk_concellos != null) {
