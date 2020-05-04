@@ -1,5 +1,5 @@
 
-//Importaciones--------------------------------------------------------------------------------------------------
+//Importaciones--------------------------------------------------------------------------------------------
 const express = require('express');
 const helmet = require('helmet');
 const bcrypt = require('bcrypt');
@@ -41,11 +41,11 @@ server.use(bodyParser.json());
 }));*/
 //PErmiter realizar llamadas desde Angular
 server.use(cookieParser());
-server.use(jwtcontrollers.checkToken);
+//server.use(jwtcontrollers.checkToken);
 server.use(cors({
     "origin": "http://localhost:4200"
 }));
-server.use(fileUpload());
+//server.use(fileUpload());
 
 
 

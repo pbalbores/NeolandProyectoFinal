@@ -153,7 +153,10 @@ exports.usersLogin = async (req, res) => {
                                 console.log(`Datos de nombre de usuario: ${usuarioId}, Datos de Admin:${usuarioAdmin}`)
                                 res.cookie("stamp", token);
                                 res.send({
-                                    "message": "Ok, o teu contrasinal é correcto. Estás autorizado", "token": token
+                                    "message": "Ok, o teu contrasinal é correcto. Estás autorizado",
+                                    "id": usuarioId,
+                                    "admin": usuarioAdmin,
+                                    "token": token
 
                                 })
                             }

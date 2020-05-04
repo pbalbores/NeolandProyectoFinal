@@ -26,7 +26,7 @@ exports.obtenerTodosEventos = () => {
 
     return new Promise(async (resolve, reject) => {
         try {
-            const todosEventos = await connection.query("SELECT * FROM eventos e, concellos c, categorias p WHERE e.fk_concellos = c.id && e.fk_clasificacion=p.id")
+            const todosEventos = await connection.query("SELECT  e.id, e.nombreEvento,e.location1,e.localizacion2,e.fecha_in,e.fecha_fin,e.hora,e.artista,e.descripcion,e.prezo,e.imagen, e.publicacion,e.destacado,c.concello,s.categoria FROM eventos e, concellos c, categorias s WHERE e.fk_concellos = c.id && e.fk_clasificacion=s.id")
 
             resolve(todosEventos);
         } catch (error) {
@@ -43,7 +43,7 @@ exports.getEventById = (id) => {
             const eventData = await connection.query(
 
                 // SELECT * FROM eventos WHERE id= ${id}
-                ` SELECT * FROM eventos e, concellos c, categorias s WHERE e.id = ${id} && e.fk_concellos=c.id && e.fk_clasificacion=s.id
+                `SELECT  e.id, e.nombreEvento,e.location1,e.localizacion2,e.fecha_in,e.fecha_fin,e.hora,e.artista,e.descripcion,e.prezo,e.imagen, e.publicacion,e.destacado,c.concello,s.categoria FROM eventos e, concellos c, categorias s WHERE e.id = ${id} && e.fk_concellos=c.id && e.fk_clasificacion=s.id
             `)
             resolve(eventData)
         } catch (error) {
@@ -54,7 +54,7 @@ exports.getEventById = (id) => {
 }
 
 //4.EVENTOS.PUT ==CAMBIA LOS DATOS DE UN EVENTO------------------------------------------------------------------
-
+//HAY QUE DARLE UNA VUELTA Y MONTARLO COMO EL RESTO
 exports.modificarEvento = (id, nuevoNombreEvento, nuevoLocation1, nuevoFkConcellos, nuevoLocalizacion2, nuevoFechaIn, nuevoFechaFin, nuevoHora, nuevoArtista, nuevoDescripcion, nuevoPrezo, nuevoImagen, nuevoFkClasificacion, nuevoFkUsuario, nuevoPublicacion) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -104,7 +104,7 @@ exports.borrarEvento = (idEvento) => {
 exports.filtrarEventos = ({ id = null, nombreEvento = null, fk_concellos = null, fecha_in = null, fecha_fin = fecha_in, artista = null, fk_clasificacion = null }) => {
     return new Promise(async (resolve, reject) => {
 
-        let sql = 'SELECT * FROM eventos e,  concellos c, categorias s WHERE 1=1 ';
+        let sql = 'SELECT  e.id, e.nombreEvento,e.location1,e.localizacion2,e.fecha_in,e.fecha_fin,e.hora,e.artista,e.descripcion,e.prezo,e.imagen, e.publicacion,e.destacado,c.concello,s.categoria FROM eventos e,  concellos c, categorias s WHERE 1=1';
         if (id != null) {
             sql += ` && e.id="${id}" `
         }
@@ -126,7 +126,7 @@ exports.filtrarEventos = ({ id = null, nombreEvento = null, fk_concellos = null,
         try {
             const result = await connection.query(sql);
             resolve(result)
-            console.log(`REspuesta recibida desde la bbdd. EventosModel ${JSON.stringify(result)}`)
+            // console.log(`REspuesta recibida desde la bbdd. EventosModel ${JSON.stringify(result)}`)
         } catch (error) {
             console.log(error)
             reject(error)
@@ -140,7 +140,7 @@ exports.obtenerTodosEventosAct = () => {
 
     return new Promise(async (resolve, reject) => {
         try {
-            const todosEventosAct = await connection.query("SELECT * FROM eventos e, concellos c, categorias s WHERE e.fk_concellos=c.id && e.fk_clasificacion=s.id && e.fecha_in >= DATE(NOW())")
+            const todosEventosAct = await connection.query("SELECT  e.id, e.nombreEvento,e.location1,e.localizacion2,e.fecha_in,e.fecha_fin,e.hora,e.artista,e.descripcion,e.prezo,e.imagen, e.publicacion,e.destacado,c.concello,s.categoria FROM eventos e, concellos c, categorias s WHERE e.fk_concellos=c.id && e.fk_clasificacion=s.id && e.fecha_in >= DATE(NOW())")
 
             resolve(todosEventosAct);
         } catch (error) {
@@ -155,7 +155,7 @@ exports.obtenerTodosEventosToday = () => {
 
     return new Promise(async (resolve, reject) => {
         try {
-            const todosEventosToday = await connection.query("SELECT * FROM eventos e, concellos c, categorias s WHERE e.fk_concellos=c.id && e.fk_clasificacion=s.id && e.fecha_in = DATE(NOW())")
+            const todosEventosToday = await connection.query("SELECT  e.id, e.nombreEvento,e.location1,e.localizacion2,e.fecha_in,e.fecha_fin,e.hora,e.artista,e.descripcion,e.prezo,e.imagen, e.publicacion,e.destacado,c.concello,s.categoria FROM eventos e, concellos c, categorias s WHERE e.fk_concellos=c.id && e.fk_clasificacion=s.id && e.fecha_in = DATE(NOW())")
             resolve(todosEventosToday);
         } catch (error) {
             reject(error);

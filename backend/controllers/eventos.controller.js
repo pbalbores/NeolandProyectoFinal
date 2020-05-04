@@ -150,7 +150,8 @@ exports.filtrarEventos = async (req, res) => {
         if (errors.isEmpty()) {
             const datos = req.body; {
                 const datosFiltrados = await eventosModel.filtrarEventos(datos)
-                // res.send(datosFiltrados)
+                res.send(datosFiltrados)
+                console.log(`Respuesta recibida desde EventosModel. EventosController ${JSON.stringify(datosFiltrados)}`)
                 if (datosFiltrados.isEmpty) {
                     res.send({ "error": "Non existen eventos para eses criterios de busca. Proba con outros" })
                 } else {
