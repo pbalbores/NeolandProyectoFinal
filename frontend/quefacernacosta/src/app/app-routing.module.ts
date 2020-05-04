@@ -23,14 +23,14 @@ const routes: Routes = [
 
   { path: 'login', component: UserLoginComponent },
   { path: 'register', component: UserRegisterComponent },
-  { path: 'datosuser', component: UserIdComponent },
+  { path: 'user/:id', component: UserIdComponent },
   { path: 'eventos/all', component: EventosAllComponent },
   { path: 'eventos/new', component: EventosNewComponent },
   // { path: 'eventos/filter', component: EventosFilterComponent },
   { path: 'eventos/:id', component: EventosFilterComponent },
   { path: 'eventos/today', component: EventosTodayComponent },
-  { path: 'carrousel', component: CarrouselComponent },
-  { path: 'sub01', component: HeaderSub01Component },
+  // { path: 'carrousel', component: CarrouselComponent },
+  // { path: 'sub01', component: HeaderSub01Component },
 
   //En caso de que alguien meta mal la URL =Que la página que se muestra por defecto
   { path: '**', component: EventosIndexComponent },

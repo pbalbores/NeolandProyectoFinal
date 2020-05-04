@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class EventosFilterComponent implements OnInit {
 
-  constructor(private EventosAllService: EventosAllService, private rutaActiva: ActivatedRoute, private _http: HttpClient) { }
+  constructor(private EventosAllService: EventosAllService, private rutaActiva: ActivatedRoute, private http: HttpClient) { }
 
   eventos: object;
   id: number;
@@ -18,9 +18,9 @@ export class EventosFilterComponent implements OnInit {
   //HACEMOS LA LLAMADA A LA API PASÁNDOLE LA ID PARA QUE NOS DEVUELVA EL EVENTO
 
   sendData() {
-    console.log(`"id": ${this.id}`)
+    console.log(`"id pasada para pintar evento. EVC": ${this.id}`)
 
-    return this._http.put('http://localhost:3000/eventos/filtrar',
+    return this.http.put('http://localhost:3000/eventos/filtrar',
       {
         "id": this.id,
       }
@@ -49,8 +49,8 @@ export class EventosFilterComponent implements OnInit {
 
     this.rutaActiva.params.subscribe((params: Params) => {
       this.id = params.id
-      console.log(params)
-      console.log(this.id)
+      console.log(`EFC-Datos recuperados de params ${params}`)
+      console.log(`EFC-Pasamos datos de params a variable ${this.id}`)
     })
 
     this.sendData();

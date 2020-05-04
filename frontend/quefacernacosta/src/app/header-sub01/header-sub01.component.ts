@@ -93,10 +93,14 @@ export class HeaderSub01Component implements OnInit {
 
 
   }
-  abrirPaginaEvento(register) {
-    console.log("abrir pagina evento activado")
 
-    this.router.navigateByUrl(register)
+  //OBTENEMOS DATOS DEL EVENTO DEL HTML, SACAMOS EL ID Y REDIRIGIMOS A LA PÁGINA DE EVENTO
+
+  abrirPaginaEvento(evento) {
+    let eventoId = evento.id;
+
+    console.log(eventoId)
+    this.router.navigate(['/eventos/', eventoId])
   }
 
   ngOnInit(): void {

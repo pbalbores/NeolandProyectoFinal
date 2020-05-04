@@ -18,6 +18,8 @@ export class UsersService {
   isLoggedInn = false;
   //Creamos una variable para marcar la ID del usuario. Por defecto es 0. Cuando se logueé esta variable recogerá la ID del usuario
   userID = 0;
+  //Creamos una variable para marcar si el usuario es o no Administrador
+  administrador = 0;
 
   //1. PERMITE A UN USUARIO LOGEARSE----------------------------------------------------------------------
   //UNA VEZ LOGUEADO SERÁ REDIRIGIDO A DONDE QUERAMOS
@@ -31,19 +33,21 @@ export class UsersService {
     })
       .subscribe((responseAPI) => {
         if (environment.production === false) {
-          document["cookies"] = `stamp=${responseAPI["token"]}`
+          //document["cookies"] = `stamp=${responseAPI["token"]}`
+
+          localStorage.setItem("lToken", responseAPI["token"])
+          //Si API OK. isLoggedIn será true
+
+          this.isLoggedInn = true;
+          this.userID = responseAPI["id"];
+          this.administrador = responseAPI["admin"]
+
+          console.log(responseAPI)
+          console.log(this.userID)
+          //Una vez logueado redirijo al usuario a la página que yo quiera
+          this.router.navigate(['user/', this.userID])
+
         }
-        //Si API OK. isLoggedIn será true
-
-        this.isLoggedInn = true;
-        this.userID = responseAPI["id"];
-
-        console.log(responseAPI)
-        console.log(this.userID)
-        //Una vez logueado redirijo al usuario a la página que yo quiera
-        this.router.navigateByUrl('eventos/all')
-
-
       })
 
     //Si API OK. isLoggedIn será true

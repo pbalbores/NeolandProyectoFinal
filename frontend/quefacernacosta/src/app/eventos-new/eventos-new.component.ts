@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ReusablesService } from '../services/reusables.service';
-import { Evento } from '../models/evento';
+
 
 
 @Component({
@@ -46,13 +46,25 @@ export class EventosNewComponent implements OnInit {
       (data) => { // Success
 
         this.datosEventoEngadido = data;
-        console.log(data)
+        console.log(`data`)
       },
       (error) => {
         console.error(error);
       }
     )
   }
+
+  //Método para meter token en cabecera de petición
+
+  createHttpOptions() {
+    return {
+      headers: new HttpHeaders({
+        "user-token": localStorage.getItem("lToken"),
+      }),
+    };
+  }
+
+
 
   submitEvento() {
     console.log(this.nombreEvento, this.location1, this.fk_concellos, this.localizacion2, this.fecha_in, this.fecha_fin, this.hora, this.artista, this.descripcion, this.prezo, this.imagen, this.fk_clasificacion, this.fk_usuario)
@@ -71,7 +83,8 @@ export class EventosNewComponent implements OnInit {
         "imagen": this.imagen,
         "fk_clasificacion": this.fk_clasificacion,
         "fk_usuario": this.fk_usuario
-      }
+      },
+      this.createHttpOptions()
 
     ).subscribe(
       (data) => { // Success

@@ -16,5 +16,34 @@ MEDIANTE UN ENLACE O BOTÓN
 
 -->
 
+<div class="container ">
+    <div class="proba" *ngFor='let usuario of usuarios'>
+        <!--  <p>{{usuario.nombreUsuario}}</p>
+        <p>{{usuario.email}}</p>-->
 
-<p> {{datosUsuario}}</p>
+        <div class="row">
+            <div class="col-12 col-md-4">
+
+                <div class="card" style="width: 18rem;">
+                    <img src="../../assets/images/iconos/iconoweb_png.png" class=" rounded-circle" avatarImage
+                        alt="icono">
+                    <div class="card-body">
+                        <h5 class="card-title">{{usuario.nombreUsuario}}</h5>
+                        <p class="card-text">{{usuario.email}}</p>
+                    </div>
+                    <div class="card-body">
+                        <button type="button" class="btn btn-primary" (click)="userUpdate()">Cambiar datos</button>
+
+                        <button type="button" class="btn btn-danger" (click)="userDelete()">Eliminar usuario</button>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-12 col-md-8" style="background-color: red;height: 150px;"></div>
+
+
+
+        </div>
+    </div>
+</div>

@@ -14,11 +14,14 @@
                     <h5 class="card-title">{{evento.nombreEvento}}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{evento.artista}}</h6>
                     <p class="card-text"> <b>Lugar: </b>{{evento.concello}}<br>
-                        <b>Data: </b> {{evento.fecha_in|date:"EEE, d  MMM" }} <b>Hora: </b> {{evento.fecha_in|date:"hh:mm"
-                  //Utilizamos un pipe para darle formato a la hora
-                                                        }}</p>
+                        <b>Data: </b> {{evento.fecha_in|date:"EEE, d  MMM":'':'en'}} <b>Hora: </b> {{evento.fecha_in|date:"hh:mm"
+                              //Utilizamos un pipe para darle formato a la hora
+                                                                    }}</p>
 
-                    <a href="#" class="btn btn-primary">Boton especial</a>
+                    <!-- <div (clik)="abrirPaginaEvento(evento)" style="background-color: red;">Máis info</div>-->
+
+                    <button type="button" class="btn btn-primary" (click)="abrirPaginaEvento(evento)">Máis
+                        info </button>
                 </div>
             </div>
 

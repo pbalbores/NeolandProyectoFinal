@@ -77,7 +77,7 @@
 <!--FIN MENU FILTRADO -->
 
 
-<div class="card">
+<!--<div class="card">
     <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs">
             <li class="navTitle">
@@ -95,27 +95,28 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Con nenos</a>
             </li>
-        </ul>
-        <div class="card-group">
-            <div *ngFor='let evento of eventos'>
-                <div class="card eventCard" style="width: 18rem;">
-                    <div class="card-header">
-                        <h6>{{evento.categoria}}</h6>
-                    </div>
-                    <img src="{{evento.imagen}}" style="height:200px ;" class="card-img-top"
-                        alt="{{evento.nombreEvento}}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{evento.nombreEvento}}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{{evento.artista}}</h6>
-                        <p class="card-text"> <b>Lugar: </b>{{evento.concello}}<br>
-                            <b>Data: </b> {{evento.fecha_in|date:"EEE, d  MMM" }} <b>Hora: </b> {{evento.fecha_in|date:"hh:mm"
+        </ul>-->
+<div class="card-group">
+    <div *ngFor='let evento of eventos'>
+        <div class="card eventCard" style="width: 18rem;">
+            <div class="card-header">
+                <h6>{{evento.categoria}}</h6>
+            </div>
+            <img src="{{evento.imagen}}" style="height:200px ;" class="card-img-top" alt="{{evento.nombreEvento}}">
+            <div class="card-body">
+                <h5 class="card-title">{{evento.nombreEvento}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{evento.artista}}</h6>
+                <p class="card-text"> <b>Lugar: </b>{{evento.concello}}<br>
+                    <b>Data: </b> {{evento.fecha_in|date:"EEE, d  MMM":'':'en'}} <b>Hora: </b> {{evento.fecha_in|date:"hh:mm"
                           //Utilizamos un pipe para darle formato a la hora
                                                                 }}</p>
 
-                        <button type="button" class="btn btn-primary" (click)="abrirPaginaEvento('eventos/3')">Máis
-                            info</button>
-                    </div>
-                </div>
+                <!-- <div (clik)="abrirPaginaEvento(evento)" style="background-color: red;">Máis info</div>-->
 
+                <button type="button" class="btn btn-primary" (click)="abrirPaginaEvento(evento)">Máis
+                    info </button>
             </div>
         </div>
+
+    </div>
+</div>
