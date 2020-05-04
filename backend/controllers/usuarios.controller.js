@@ -54,16 +54,16 @@ exports.listaUsuarios = async (req, res) => {
     }
 }
 
-//3. USUARIOS.GET ==DEVUELVE UN SOLO USUARIO--GET DETAIL---------------------------------------------------------
-exports.getUsuarioByName = async (req, res) => {
+//3. USUARIOS.GET ==DEVUELVE UN SOLO USUARIO POR ID--GET DETAIL-------------------------------------------------
+exports.getUsuarioById = async (req, res) => {
     try {
         //Sacar del Path param el nombre del usuario
-        const userName = req.params.nombreUsuario;
+        const userId = req.params.id;
         //Pedir al modelo que saque los datos del producto
-        const userData = await usuariosModel.getUserByName(userName);
+        const userData = await usuariosModel.getUserById(userId);
         //SI LO QUE NOS DEVUELVE LA BASE DE DATOS TIENE UN LONGITUD IGUAL A CERO ES QUE EL USUARIO NO EXISTE. ESO ES LO QUE LE RESPONDEMOS AL USUARIO
         if (userData.length === 0) {
-            res.status(400).send({ "message": "Ese usuario non existe" })
+            res.status(400).send({ "message": "Ese usuario non existe uc3" })
         } else {
             res.send(userData)
         }
@@ -91,7 +91,7 @@ exports.modificarUsuario = async (req, res) => {
             if (result.affectedRows > 0) {
                 res.send({ "message": "Datos de usuario modificados con éxito" })
             } else {
-                res.status(404).send({ "error": "Ese Id non existe" })
+                res.status(404).send({ "error": "Ese Id non existe uc4" })
             }
         }
         catch (error) {
@@ -115,7 +115,7 @@ exports.borrarUsuario = async (req, res) => {
             //Enviar confirmación al cliente
             res.send({ "message": `O usuario con nome ${nombreUsuario} foi eliminado` })
         } else {
-            res.status(404).send({ "error": "Ese usuario non existe" })
+            res.status(404).send({ "error": "Ese usuario non existe uc5" })
         }
 
     } catch (error) {
@@ -209,4 +209,24 @@ exports.usersPasswordRecover = async (req, res) => {
     }
 }
 
-//8. SACAMOS ID Y SI ES ADMINISTRADOR O NO
+//8. USUARIOS.GET ==DEVUELVE UN SOLO USUARIO FILTRANDO POR NOMBRE-GET DETAIL------------------------------------
+exports.getUsuarioByName = async (req, res) => {
+    try {
+        //Sacar del Path param el nombre del usuario
+        const userName = req.params.nombreUsuario;
+
+
+        //Pedir al modelo que saque los datos del producto
+        const userDatabyName = await usuariosModel.getUserByName(userName);
+        //SI LO QUE NOS DEVUELVE LA BASE DE DATOS TIENE UN LONGITUD IGUAL A CERO ES QUE EL USUARIO NO EXISTE. ESO ES LO QUE LE RESPONDEMOS AL USUARIO
+        if (userDatabyName.length === 0) {
+
+            res.status(400).send({ "message": "Ese usuario non existe. uc8" })
+        } else {
+            res.send(userDatabyName)
+        }
+    } catch (error) {
+        console.log(error)
+        res.send(error)
+    }
+}

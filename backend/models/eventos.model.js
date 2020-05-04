@@ -26,7 +26,8 @@ exports.obtenerTodosEventos = () => {
 
     return new Promise(async (resolve, reject) => {
         try {
-            const todosEventos = await connection.query("SELECT * FROM eventos e, concellos c, categorias s WHERE e.fk_concellos=c.id && e.fk_clasificacion=s.id")
+            const todosEventos = await connection.query("SELECT * FROM eventos e, concellos c, categorias p WHERE e.fk_concellos = c.id && e.fk_clasificacion=p.id")
+
             resolve(todosEventos);
         } catch (error) {
             reject(error);
@@ -125,6 +126,7 @@ exports.filtrarEventos = ({ id = null, nombreEvento = null, fk_concellos = null,
         try {
             const result = await connection.query(sql);
             resolve(result)
+            console.log(`REspuesta recibida desde la bbdd. EventosModel ${JSON.stringify(result)}`)
         } catch (error) {
             console.log(error)
             reject(error)

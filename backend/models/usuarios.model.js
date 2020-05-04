@@ -38,11 +38,11 @@ exports.obtenerTodosUsuarios = () => {
 
 }
 
-//3. OBTENER DATOS DE UN USUARIO UTILIZANDO EL NOMBRE DE USUARIO---GET DETAIL-----------------------------------
-exports.getUserByName = (userName) => {
+///3. OBTENER DATOS DE UN USUARIO UTILIZANDO LA ID---GET DETAIL-----------------------------------
+exports.getUserById = (userId) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const userData = await connection.query(`SELECT * FROM usuarios WHERE nombreUsuario= "${userName}"`)
+            const userData = await connection.query(`SELECT * FROM usuarios WHERE id= "${userId}"`)
             resolve(userData)
         } catch (error) {
             console.log(error)
@@ -85,6 +85,20 @@ exports.borrarUsuario = (nombreUsuario) => {
         } catch (error) {
             console.log(error)
             reject(error)
+        }
+    })
+}
+
+//8. USUARIOS.GET ==DEVUELVE UN SOLO USUARIO FILTRANDO POR NOMBRE-GET DETAIL------------------------------------
+exports.getUserByName = (userName) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const userDatabyName = await connection.query(`SELECT * FROM usuarios WHERE nombreUsuario= "${userName}"`)
+            resolve(userDatabyName)
+
+        } catch (error) {
+            console.log(error)
+            reject.send(error)
         }
     })
 }

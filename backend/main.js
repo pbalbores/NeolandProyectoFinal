@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
 //Instalar versión 4.0.0 (npm i bcrypt@4.0.0)
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const fileUpload = require('express-fileupload');
 //EXPRESS VALIDATOR SE IMPORTA DE UNA FORMA ESPECIAL
 const { check } = require('express-validator');
 const jsonWebToken = require('jsonwebtoken');
@@ -44,6 +45,7 @@ server.use(jwtcontrollers.checkToken);
 server.use(cors({
     "origin": "http://localhost:4200"
 }));
+server.use(fileUpload());
 
 
 
@@ -72,7 +74,7 @@ server.post('/users/new', [
 server.get('/users/all', usersController.listaUsuarios)
 
 //3. USUARIOS.GET ==DEVUELVE UN SOLO USUARIO--GET DETAIL---------------------------------------------------------
-server.get('/users/:nombreUsuario', usersController.getUsuarioByName)
+server.get('/users/:id', usersController.getUsuarioById)
 
 //4. USUARIOS.PUT ==CAMBIA LOS DATOS DE UN USUARIO --PUT---------------------------------------------------------
 
@@ -96,6 +98,9 @@ server.post('/users/recovery', [
     check('nombreUsuario').isString().escape().trim(),
     check('email').isEmail().escape().trim(),
 ], usersController.usersPasswordRecover);
+
+//8. USUARIOS.GET ==DEVUELVE UN SOLO USUARIO FILTRANDO POR NOMBRE-GET DETAIL------------------------------------
+server.get('/users/get/:nombreUsuario', usersController.getUsuarioByName)
 
 
 //-----------------##-TABLA EVENTOS-##-----------------------------------------------------------------
@@ -154,6 +159,8 @@ server.get('/eventos/all/active', eventosController.listaEventosAct);
 
 //8. DEVUELVE TODOS LOS EVENTOS CON FECHA IGUAL  A HOY------------------------------------------
 server.get('/eventos/all/today', eventosController.listaEventosToday);
+
+
 
 //-----------------##-TABLA CONCELLOS-##------------------------------------------------------------------
 
