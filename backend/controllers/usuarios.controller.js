@@ -76,6 +76,24 @@ exports.getUsuarioById = async (req, res) => {
 //4. USUARIOS.PUT ==CAMBIA LOS DATOS DE UN USUARIO --PUT---------------------------------------------------------
 
 exports.modificarUsuario = async (req, res) => {
+    /* try {
+         const errors = validationResult(req);
+         console.log(`Errores de validación del Body ${errors.array}`)
+         if (errors.isEmpty()) {
+             const datos = req.body; {
+                 const datosFiltrados = await usuariosModel.modificarUsuario(datos)
+                 res.send(datosFiltrados)
+                 console.log(`Respuesta recibida desde EventosModel. EventosController ${JSON.stringify(datosFiltrados)}`)
+                 if (datosFiltrados.isEmpty) {
+                     res.send({ "error": "Non existen eventos para eses criterios de busca. Proba con outros" })
+                 } else {
+                     res.send(datosFiltrados)
+                 }
+             }
+         }
+     } catch (error) {
+         res.send(error)
+     }*/
     const errors = validationResult(req)//Ejecuta las validaciones
     if (errors.isEmpty()) {
         const nombreUsuario = req.body.nombreUsuario;
@@ -230,6 +248,27 @@ exports.getUsuarioByName = async (req, res) => {
         }
     } catch (error) {
         console.log(error)
+        res.send(error)
+    }
+}
+
+//9.USUARIOS DELETE == BORRA USUARIO POR ID
+
+exports.borrarUsuarioPorID = async (req, res) => {
+    //Cogemos de los path params el nombreUsuario
+    const id = req.params.id;
+    //Pedimos que el modelo elimine ese usuario
+    try {
+        const results = await usuariosModel.borrarUsuarioPorId(id)
+        //Comprobar que el usuario exista
+        if (results.affectedRows > 0) {
+            //Enviar confirmación al cliente
+            res.send({ "message": `O usuario con ID ${id} foi eliminado` })
+        } else {
+            res.status(404).send({ "error": "Ese usuario non existe uc5" })
+        }
+
+    } catch (error) {
         res.send(error)
     }
 }

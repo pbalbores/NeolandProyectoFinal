@@ -102,6 +102,9 @@ server.post('/users/recovery', [
 //8. USUARIOS.GET ==DEVUELVE UN SOLO USUARIO FILTRANDO POR NOMBRE-GET DETAIL------------------------------------
 server.get('/users/get/:nombreUsuario', usersController.getUsuarioByName)
 
+//9.USUARIOS DELETE == BORRA USUARIO POR ID
+server.delete('/users/delete/user/:id', usersController.borrarUsuarioPorID);
+
 
 //-----------------##-TABLA EVENTOS-##-----------------------------------------------------------------
 

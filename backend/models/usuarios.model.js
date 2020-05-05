@@ -57,12 +57,12 @@ exports.modificarUsuario = (id, nuevoNombre, nuevaPassword, nuevoEmail, nuevoAdm
     return new Promise(async (resolve, reject) => {
         try {
             const sql = `
-            UPDATE usuarios SET
-            nombreUsuario = "${nuevoNombre}", 
-            password = "${nuevaPassword}", 
-            email = "${nuevoEmail}",  
-            admin  = "${nuevoAdmin}"
-            WHERE id = ${id}
+         UPDATE usuarios SET
+          nombreUsuario = "${nuevoNombre}",
+           password = "${nuevaPassword}",
+          email = "${nuevoEmail}",
+           admin  = "${nuevoAdmin}"
+           WHERE id = ${id}
       `
             const result = await connection.query(sql);
             resolve(result)
@@ -72,6 +72,42 @@ exports.modificarUsuario = (id, nuevoNombre, nuevaPassword, nuevoEmail, nuevoAdm
             reject(error)
         }
     })
+}
+
+exports.modificarUsuario2 = ({ id, nombreUsuario = null, password = null, email = null, admin = null }) => {
+    return new Promise(async (resolve, reject) => {
+
+        //HAcemos llamada get para obtener datos 
+        try {
+            const datosUsuarioOld = this.getUserById(id);
+            console.log(`*************DATOS USUARIOS OLD****************${datosUsuariosOld}`)
+
+        } catch (error) {
+            console.log(error)
+        }
+
+        let sql = 'UPDATE usuarios SET ';
+        if (nombreUsuario != null) {
+            sql += `nombreUsuario="${nombreUsuario}" `
+        }
+        if (password != null) {
+            sql += `,password="${password}" `
+        } if (email != null) {
+            sql += `,email="${email}" `
+        } if (admin != null) {
+            sql += ` ,admin="${admin}" `
+        } if (id != null) {
+            sql += ` WHERE id=${id} `
+        } try {
+            const result = await connection.query(sql);
+            resolve(result)
+            console.log(`REspuesta recibida desde la bbdd. EventosModel ${JSON.stringify(result)}`)
+        } catch (error) {
+            console.log(error)
+            reject(error)
+        }
+    })
+
 }
 
 //5. USUARIOS DELETE ==BORRA UN USUARIO--------------------------------------------------------------------------
@@ -99,6 +135,20 @@ exports.getUserByName = (userName) => {
         } catch (error) {
             console.log(error)
             reject.send(error)
+        }
+    })
+}
+
+//9.USUARIOS DELETE == BORRA USUARIO POR ID
+exports.borrarUsuarioPorId = (id) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const sql = `DELETE FROM usuarios WHERE id="${id}"`;
+            const result = await connection.query(sql);
+            resolve(result)
+        } catch (error) {
+            console.log(error)
+            reject(error)
         }
     })
 }
