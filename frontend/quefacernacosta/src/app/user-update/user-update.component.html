@@ -1,0 +1,43 @@
+<!--PENDIENTE:
+1. VER LA MANERA DE QUE NO HAYA QUE INTRODUCIR TODOS LOS DATOS ---POSIBLEMENTE MODIFICANDO LA LLAMADA DE MODELS EN EL BACKEND
+2. CUANDO SE CAMBIAN LOS DATOS DEVOLVER LOS DATOS CAMBIADOS--IMPLEMENTAR UNA LLAMADA GET PASANDO EL ID Y PINTARLA EN HTML-->
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="left col-12 col-md-5 registerForm">
+            <div class="tituloSeccion">
+                <h2>Modificar datos de usuario</h2>
+            </div>
+            <div>
+                <p>Para cambiar os datos da túa conta de usuario introduce no formulario aqueles que desexes modificar.
+                    Os que queiras deixar igual tamén debes introducilos, aínda que sexan os mesmos.
+                </p>
+            </div>
+            <div *ngFor='let usuario of usuarios'>
+                <form class="form-group col-12 col-md-9" (ngForm)="updateForm" #updateForm="ngForm"
+                    (ngSubmit)="sendForm()">
+                    <label class="equitetaDeFormulario" for="userName">
+                        Introduce o novo Nome de usuario
+                    </label>
+                    <input type="text" class="form-control" id="userName" placeholder="{{usuario.nombreUsuario}}"
+                        [(ngModel)]="nombreUsuario" name="username">
+                    <label class="equitetaDeFormulario" for="password"> Introduce o novo EMail</label>
+                    <input type="email" class="form-control" id="email" placeholder="{{usuario.email}}"
+                        [(ngModel)]="email" name="email ">
+                    <label class="equitetaDeFormulario" for="password"> Introduce o novo Contrasinal</label>
+                    <input type="password" class="form-control" id="password" placeholder="*********"
+                        [(ngModel)]="password" name="password ">
+
+
+                    <button type="submit" class="btn btn-primary">Cambiar datos</button>
+                </form>
+            </div>
+            <div class="alert alert-primary" role="alert">
+                {{message}}
+            </div>
+        </div>
+        <div class="right col-12 col-md-7"><img src="../../assets/images/login.jpg" width="900" alt="imagen_carrera">
+        </div>
+    </div>
+</div>
