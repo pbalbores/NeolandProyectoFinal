@@ -102,10 +102,11 @@ exports.modificarEvento = async (req, res) => {
         const nuevoFkClasificacion = req.body.fk_clasificacion;
         const nuevoFkUsuario = req.body.fk_usuario;
         const nuevoPublicacion = req.body.publicacion;
+        const nuevoDestacado = req.body.nuevoDestacado
 
         //Llamamos al modelo
         try {
-            const result = await eventosModel.modificarEvento(id, nuevoNombreEvento, nuevoLocation1, nuevoFkConcellos, nuevoLocalizacion2, nuevoFechaIn, nuevoFechaFin, nuevoHora, nuevoArtista, nuevoDescripcion, nuevoPrezo, nuevoImagen, nuevoFkClasificacion, nuevoFkUsuario, nuevoPublicacion);
+            const result = await eventosModel.modificarEvento(id, nuevoNombreEvento, nuevoLocation1, nuevoFkConcellos, nuevoLocalizacion2, nuevoFechaIn, nuevoFechaFin, nuevoHora, nuevoArtista, nuevoDescripcion, nuevoPrezo, nuevoImagen, nuevoFkClasificacion, nuevoFkUsuario, nuevoPublicacion, nuevoDestacado);
             if (result.affectedRows > 0) {
                 res.send({ "message": "Datos de evento modificados con éxito" })
             } else {
@@ -141,7 +142,7 @@ exports.borrarEvento = async (req, res) => {
     }
 }
 
-//6. FILTRA EVENTOS-----------------------------------------------------------------------------------------
+//6. FILTRA EVENTOS-------------------------------------------------------------------------------------
 exports.filtrarEventos = async (req, res) => {
 
     try {

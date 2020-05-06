@@ -148,7 +148,8 @@ check('prezo').optional().isString().escape().trim(),
 check('imagen').optional().isString().escape(),//.trim(),
 check('fk_clasificacion').not().isEmpty().isNumeric().escape().trim(),
 check('fk_usuario').not().isEmpty().isNumeric().escape().trim(),
-check('publicacion').optional().isNumeric().escape().trim()
+check('publicacion').optional().isNumeric().escape().trim(),
+check('destacado').optional().isNumeric().escape().trim()
 ], eventosController.modificarEvento);
 
 //5. EVENTOS.DELETE ==BORRA UN EVENTO---------------------------------------------------------------------
