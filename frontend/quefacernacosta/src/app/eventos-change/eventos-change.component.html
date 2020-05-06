@@ -1,0 +1,164 @@
+<div class="container">
+    <div class="tituloSeccion">
+        <h2>Modificar datos de evento</h2>
+    </div>
+    <!--   <div class="row">   
+
+        <div class="col-12 col-md-5 left">
+        <div class="col-12" *ngFor='let evento of evento'>
+            <div class="card col-sm-6">
+                <div class="card-header"><b>ID: {{evento.id}}</b></div>
+                <div class="card-body">
+                    <h5 class="card-title"><b>Datos actuais </b></h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><b>Nombre de evento: </b>
+                            {{evento.nombreEvento}}</li>
+                        <li class="list-group-item"><b>Data de incio: </b>
+                            {{evento.fecha_in|date:"EEE, d  MMM":'':'en'}}</li>
+                        <li class="list-group-item"><b>Data de finalización: </b>
+                            {{evento.fecha_fin|date:"EEE, d  MMM":'':'en'}}</li>
+                        <li class="list-group-item"><b>Hora: </b>
+                            {{evento.hora}}</li>
+                        <li class="list-group-item"><b>Concello:</b> {{evento.concello}}</li>
+                        <li class="list-group-item"><b>Localización 1:</b> {{evento.location1}}</li>
+                        <li class="list-group-item"><b>Localización 2:</b> {{evento.localizacion2}}</li>
+                        <li class="list-group-item"><b>Artista:</b> {{evento.artista}}</li>
+                        <li class="list-group-item"><b>Descrición:</b> {{evento.descripcion}}</li>
+                        <li class="list-group-item"><b>Prezo:</b> {{evento.prezo}}</li>
+                        <li class="list-group-item"><b>Imaxe</b> <img src="{{evento.imagen}} " class="card-img"
+                                alt="{{evento.nombreEvento}}" width="100%"></li>
+
+
+                        <li class="list-group-item"><b>Publicado:</b> {{evento.publicacion}}</li>
+                        <li class="list-group-item"><b>Destacado:</b> {{evento.destacado}}</li>
+                    </ul>
+                    <<div class="btn-group" role="group" aria-label="Ver evento">
+                            <button type="button" class="btn btn-primary"><img
+                                    src=" ../../assets/images/iconos/visibility-24px.svg"
+                                    alt="imagen ver datos"></button>
+                            <button type="button" class="btn btn-warning"><img
+                                    src="../../assets/images/iconos/build-24px.svg" alt="imagen ver datos"></button>
+                           <button type="button" class="btn btn-success"><img
+                                                            src="../../assets/images/iconos/verified_user-24px.svg"
+                                                            alt="imagen subir nivel"></button>
+                                                    <button type="button" class="btn btn-info"><img
+                                                            src="../../assets/images/iconos/done_outline-24px.svg"
+                                                            alt="imagen delete"></button>
+                                                    <button type="button" class="btn btn-danger"><img
+                                                            src="../../assets/images/iconos/delete_forever-24px.svg"
+                                                            alt="imagen delete" (click)="  eliminarEvento(evento)"></button>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+         </div> -->
+
+    <div class="row" *ngFor='let evento1 of evento'>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header"><b>Datos actuais</b><button type="button" class="btn btn-danger"
+                        (click)=" obtenerDatosdeEvento(evento1)">Modificar Evento</button></div>
+                <div class="card-body">
+                    <h5 class="card-title"><b>ID: {{evento1.id}}</b></h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><b>Nombre de evento: </b>
+                            {{evento1.nombreEvento}}</li>
+                        <li class="list-group-item"><b>Clasificación: </b>
+                            {{evento1.categoria}}</li>
+                        <li class="list-group-item"><b>Data de incio: </b>
+                            {{evento1.fecha_in|date:"EEE, d  MMM":'':'en'}}</li>
+                        <li class="list-group-item"><b>Data de finalización: </b>
+                            {{evento1.fecha_fin|date:"EEE, d  MMM":'':'en'}}</li>
+                        <li class="list-group-item"><b>Hora: </b>
+                            {{evento1.hora}}</li>
+                        <li class="list-group-item"><b>Concello:</b> {{evento1.concello}}</li>
+                        <li class="list-group-item"><b>Localización 1:</b> {{evento1.location1}}</li>
+                        <li class="list-group-item"><b>Localización 2:</b> {{evento1.localizacion2}}</li>
+                        <li class="list-group-item"><b>Artista:</b> {{evento1.artista}}</li>
+                        <li class="list-group-item"><b>Descrición:</b> {{evento1.descripcion}}</li>
+                        <li class="list-group-item"><b>Prezo:</b> {{evento1.prezo}}</li>
+                        <li class="list-group-item"><b>Imaxe</b> <img src="{{evento1.imagen}} " class="card-img"
+                                alt="{{evento1.nombreEvento}}" width="100%"></li>
+
+
+                        <li class="list-group-item"><b>Publicado:</b> {{evento1.publicacion}}</li>
+                        <li class="list-group-item"><b>Destacado:</b> {{evento1.destacado}}</li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header"><b>Modificar datos</b></div>
+                <div class="card-body">
+                    <h5 class="card-title"><b>ID: {{evento.id}}</b></h5>
+                    <form (ngForm)="submitEventoForm" #submitEventoForm="ngForm" (ngSubmit)="putEvento()">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><b>Nombre de evento </b><input type="text"
+                                    [(ngModel)]="nombreEvento" name="nombreEvento" placeholder="Novo nome de evento">
+                            </li>
+                            <li class="list-group-item"><b>Clasificación: </b><select class="form-control"
+                                    id="exampleFormControlSelect1" [(ngModel)]="fk_clasificacion" name="clasificacion">
+                                    <option *ngFor='let categoria of datosCategorias' value="{{categoria.id}}">
+                                        {{categoria.categoria}}</option>
+
+                                </select></li>
+                            <li class="list-group-item"><b>Data de incio </b> <input type="date" [(ngModel)]="fecha_in"
+                                    name="fecha_in"></li>
+                            <li class="list-group-item"><b>Data de finalización </b>
+                                <input type="date" [(ngModel)]="fecha_fin" name="fecha_fin"></li>
+                            <li class="list-group-item"><b>Hora </b>
+                                <input type="text" [(ngModel)]="hora" name="hora"></li>
+                            <li class="list-group-item"><b>Concello</b>
+                                <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="fk_concellos"
+                                    name="concellos">
+                                    <option *ngFor='let concello of datosConcellos' value="{{concello.id}}">
+                                        {{concello.concello}}</option>
+                                </select>
+
+
+                            </li>
+                            <li class="list-group-item"><b>Localización 1</b> <input type="text" [(ngModel)]="location1"
+                                    name="location1"></li>
+                            <li class="list-group-item"><b>Localización 2</b> <input type="text"
+                                    [(ngModel)]="localizacion2" name="localizacion2"></li>
+                            <li class="list-group-item"><b>Artista</b> <input type="text" [(ngModel)]="artista"
+                                    name="artista"></li>
+                            <li class="list-group-item"><b>Descrición</b> <input type="text" [(ngModel)]="descripcion"
+                                    name="descripcion"></li>
+                            <li class="list-group-item"><b>Prezo</b> <input type="text" [(ngModel)]="prezo"
+                                    name="descripcion"></li>
+                            <li class="list-group-item"><b>Imaxe</b> <img src="{{evento.imagen}} " class="card-img"
+                                    alt="{{evento.nombreEvento}}" width="100%"></li>
+
+
+                            <li class="list-group-item"><b>Publicado: </b>
+                                <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="publicacion"
+                                    name="publicacion">
+                                    <option value="0">Non publicado</option>
+                                    <option value="1">Publicado</option>
+                                </select>
+                            </li>
+                            <li class="list-group-item"><b>Destacado: </b>
+                                <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="destacado"
+                                    name="publicacion">
+                                    <option value="0">Non destacado</option>
+                                    <option value="1">Destacado</option>
+                                </select>
+                            </li>
+                            <li class="list-group-item"> <button type="submit" class="btn btn-primary boton">Cambiar
+                                    datos</button> <button type="button" class="btn btn-danger"
+                                    (click)="eventoDelete()">Eliminar evento</button>
+                            </li>
+                        </ul>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
