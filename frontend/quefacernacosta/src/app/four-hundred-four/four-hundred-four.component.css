@@ -1,0 +1,9 @@
+.container-fluid {
+  background-image: url('../../assets/images/404image.jpg');
+  background-position: top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 600px;
+
+}
