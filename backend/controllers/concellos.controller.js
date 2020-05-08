@@ -2,7 +2,7 @@ const concellosModel = require('../models/concellos.model');
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
 
-//1. GET ALL--OBTENEMOS DATOS DE TODOS LOS CONCELLOS-------------------------------------------------------------
+//1. GET ALL--OBTENEMOS DATOS DE TODOS LOS CONCELLOS------------------------------------------------------
 
 exports.listaConcellos = async (req, res) => {
     try {
@@ -17,7 +17,7 @@ exports.listaConcellos = async (req, res) => {
     }
 }
 
-//2. GET BY ID. DEVUELVE DATOS DE CONCELLO POR ID----------------------------------------------------------------
+//2. GET BY ID. DEVUELVE DATOS DE CONCELLO POR ID---------------------------------------------------------
 exports.getConcelloById = async (req, res) => {
     try {
         //Sacar del Path param el nombre del usuario

@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const secrets = require('../config/secrets');
 
 
-//1. USUARIOS.POST ==NUEVO USUARIO--POST-------------------------------------------------------------------------
+//1. USUARIOS.POST ==NUEVO USUARIO--POST------------------------------------------------------------------
 
 exports.nuevoUsuario = async (req, res) => {
 
@@ -14,7 +14,7 @@ exports.nuevoUsuario = async (req, res) => {
 
     try {
         const errors = validationResult(req);
-        console.log(errors)
+        //console.log(errors)
         if (errors.isEmpty()) {
 
             //SACAMOS DEL BODY LA INFORMACIÓN
@@ -31,16 +31,16 @@ exports.nuevoUsuario = async (req, res) => {
             //INSERTAMOS LA INFORMACIÓN
             res.send({ "message": "Usuario creado. Agora podes enviarnos información de eventos.", "ID": result.insertId, })
         } else {
-            console.log(errors)
+            //console.log(errors)
             res.status(400).send({ "message": "O body está mal formado" })
         }
     } catch (error) {
-        console.log(error);
+        //console.log(error);
         res.send(error);
     }
 }
 
-//2. USUARIOS.GET ==DEVUELVE TODOS LOS USUARIOS--GET ALL---------------------------------------------------------
+//2. USUARIOS.GET ==DEVUELVE TODOS LOS USUARIOS--GET ALL-------------------------------------------------
 exports.listaUsuarios = async (req, res) => {
     try {
         const resultados = await usuariosModel.obtenerTodosUsuarios();
@@ -48,13 +48,13 @@ exports.listaUsuarios = async (req, res) => {
         res.send(resultados)
 
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         res.send(error)
 
     }
 }
 
-//3. USUARIOS.GET ==DEVUELVE UN SOLO USUARIO POR ID--GET DETAIL-------------------------------------------------
+//3. USUARIOS.GET ==DEVUELVE UN SOLO USUARIO POR ID--GET DETAIL-------------------------------------------
 exports.getUsuarioById = async (req, res) => {
     try {
         //Sacar del Path param el nombre del usuario
@@ -68,12 +68,12 @@ exports.getUsuarioById = async (req, res) => {
             res.send(userData)
         }
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         res.send(error)
     }
 }
 
-//4. USUARIOS.PUT ==CAMBIA LOS DATOS DE UN USUARIO --PUT---------------------------------------------------------
+//4. USUARIOS.PUT ==CAMBIA LOS DATOS DE UN USUARIO --PUT------------------------------------------------
 
 exports.modificarUsuario = async (req, res) => {
     /* try {
@@ -113,7 +113,7 @@ exports.modificarUsuario = async (req, res) => {
             }
         }
         catch (error) {
-            console.log(error)
+            // console.log(error)
             res.send(error);
         }
     } else {
@@ -144,7 +144,7 @@ exports.borrarUsuario = async (req, res) => {
 //6. USUARIOS LOGIN-----------------------------------------------------------------------------------
 exports.usersLogin = async (req, res) => {
     const errors = validationResult(req);
-    console.log(errors)
+    // console.log(errors)
     if (errors.isEmpty()) {
         const userName = req.body.nombreUsuario;
         const password = req.body.password;
@@ -165,10 +165,10 @@ exports.usersLogin = async (req, res) => {
                         //Pongo la clave que yo quiera. La tengo guardada en el archivo SECRETS
                         (error, token) => {
                             if (error) {
-                                console.log(error.json);
+                                // console.log(error.json);
                                 res.send(error)
                             } else {
-                                console.log(`Datos de nombre de usuario: ${usuarioId}, Datos de Admin:${usuarioAdmin}`)
+                                //   console.log(`Datos de nombre de usuario: ${usuarioId}, Datos de Admin:${usuarioAdmin}`)
                                 res.cookie("stamp", token);
                                 res.send({
                                     "message": "Ok, o teu contrasinal é correcto. Estás autorizado",
@@ -184,13 +184,13 @@ exports.usersLogin = async (req, res) => {
                     )
 
                 } else if (i == usuario.length - 1) {
-                    console.log(i)
+                    //   console.log(i)
                     res.status(400).send({ "Error": "O contrasinal non é correcto. Volve a intentalo" })
                 }
             }
 
         } catch (error) {
-            console.log(error);
+            //  console.log(error);
             res.send(error);
         }
     } else {
@@ -201,7 +201,7 @@ exports.usersLogin = async (req, res) => {
 //7. RECUPERAR CONTRASEÑA. COMPROBAMOS QUE USUARIO Y EMAIL COINCIDEN---------------------------------
 exports.usersPasswordRecover = async (req, res) => {
     const errors = validationResult(req);
-    console.log(errors)
+    // console.log(errors)
     if (errors.isEmpty()) {
         const userName = req.body.nombreUsuario;
         const email = req.body.email;
@@ -216,13 +216,13 @@ exports.usersPasswordRecover = async (req, res) => {
 
                     res.send({ "message": "Ok, introduce un novo contrasinal" })
                 } else if (i == usuario.length - 1) {
-                    console.log(i)
+                    //   console.log(i)
                     res.status(400).send({ "Error": "O Email e o usuario non coinciden. Téntao de novo" })
                 }
             }
 
         } catch (error) {
-            console.log(error);
+            //  console.log(error);
             res.send(error);
         }
     } else {
@@ -247,7 +247,7 @@ exports.getUsuarioByName = async (req, res) => {
             res.send(userDatabyName)
         }
     } catch (error) {
-        console.log(error)
+        //  console.log(error)
         res.send(error)
     }
 }

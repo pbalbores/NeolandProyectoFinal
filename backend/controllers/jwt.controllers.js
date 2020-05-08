@@ -8,7 +8,7 @@ const secrets = require('../config/secrets');
 
 exports.checkToken = (req, res, next) => {
     if (
-        //LLAMADAS AL SERVIDOR PARA LAS CUALES NO HACE FALTA ESTAR IDENTIFICADO
+        //LLAMADAS AL SERVIDOR PARA LAS CUALES NO HACE FALTA ESTAR IDENTIFICADO---------------------------
         req.path === '/users/login'
         || req.path === '/users/new'
         || req.path === '/eventos/all'
@@ -17,14 +17,16 @@ exports.checkToken = (req, res, next) => {
         || req.path === '/eventos/all/today'
         || req.path === '/categorias/all'
         || req.path === '/concellos/all'
+        || req.path === '/eventos/:id'
     ) {
         //SI NUESTRA LLAMADA SE ENCUENTRA ENTRE ALGUNA DE LAS ANTERIORES DAMOS ACCESO
         next()
     } else {
+        //  console.log(req.headers["user-token"])
         //SI NUESTRA LLAMADA NO ES ENCUENTRA ENTRE ALGUNA DE LAS ANTERIORES COMPROBAMOS QUE TENGA TOKEN
         if (req.headers["user-token"] !== undefined) {
             //PASO 0
-            //console.log(`Comprobamos el valor recuperado de Headers: ${req.headers["user-token"]}`)
+            //  console.log(`Comprobamos el valor recuperado de Headers: ${req.headers["user-token"]}`)
             //SI EL USUARIO TIENE DATOS DE TOKEN
             const userToken = req.headers["user-token"];
             //PASO 1
@@ -34,7 +36,7 @@ exports.checkToken = (req, res, next) => {
                 (error, confirmation) => {
                     if (error) {
                         //PASO 3
-                        console.log(`Error en paso 3 TOKEN ${userToken}, clave ${secrets.jwt_clave}`)
+                        //  console.log(`Error en paso 3 TOKEN ${userToken}, clave ${secrets.jwt_clave}`)
                         res.status(401).send({ "error": "Token mal formado. El token existe pero está mal formado" })
 
                     } else if (

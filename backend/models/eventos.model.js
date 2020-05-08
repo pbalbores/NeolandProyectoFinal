@@ -1,7 +1,7 @@
 //Importaciones
 const connection = require('./db.model');
 
-//1.EVENTOS.POST ==CREAR NUEVO EVENTO----------------------------------------------------------------------------
+//1.EVENTOS.POST ==CREAR NUEVO EVENTO---------------------------------------------------------------------
 
 exports.crearEvento = (nombreEvento, location1, fk_concellos, localizacion2, fecha_in, fecha_fin, hora, artista, descripcion, prezo, imagen, fk_clasificacion, fk_usuario, publicacion) => {
     return new Promise(async (resolve, reject) => {
@@ -12,7 +12,7 @@ exports.crearEvento = (nombreEvento, location1, fk_concellos, localizacion2, fec
             )
             resolve(result)
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             reject(error);
 
         }
@@ -27,7 +27,6 @@ exports.obtenerTodosEventos = () => {
     return new Promise(async (resolve, reject) => {
         try {
             const todosEventos = await connection.query("SELECT * FROM eventos e, concellos c, categorias s WHERE e.fk_concellos=c.id && e.fk_clasificacion=s.id")
-
             resolve(todosEventos);
         } catch (error) {
             reject(error);
@@ -35,7 +34,7 @@ exports.obtenerTodosEventos = () => {
     })
 
 }
-//3.EVENTOS.GET ==DEVUELVE UN EVENTO-----------------------------------------------------------------------------
+//3.EVENTOS.GET ==DEVUELVE UN EVENTO----------------------------------------------------------------------
 
 exports.getEventById = (id) => {
     return new Promise(async (resolve, reject) => {
@@ -47,17 +46,18 @@ exports.getEventById = (id) => {
             `)
             resolve(eventData)
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             reject.send(error)
         }
     })
 }
 
-//4.EVENTOS.PUT ==CAMBIA LOS DATOS DE UN EVENTO------------------------------------------------------------------
-//HAY QUE DARLE UNA VUELTA Y MONTARLO COMO EL RESTO
+//4.EVENTOS.PUT ==CAMBIA LOS DATOS DE UN EVENTO-----------------------------------------------------------
+
 exports.modificarEvento = (id, nuevoNombreEvento, nuevoLocation1, nuevoFkConcellos, nuevoLocalizacion2, nuevoFechaIn, nuevoFechaFin, nuevoHora, nuevoArtista, nuevoDescripcion, nuevoPrezo, nuevoImagen, nuevoFkClasificacion, nuevoFkUsuario, nuevoPublicacion, nuevoDestacado) => {
     return new Promise(async (resolve, reject) => {
         try {
+            //  console.log("Llamada realizada en EventosModel")
             const sql = `
             UPDATE eventos SET
             nombreEvento ="${nuevoNombreEvento}", 
@@ -81,13 +81,13 @@ exports.modificarEvento = (id, nuevoNombreEvento, nuevoLocation1, nuevoFkConcell
             resolve(result)
 
         } catch (error) {
-            console.log(error)
+            //  console.log(error)
             reject(error)
         }
     })
 }
 
-//5. EVENTOS.DELETE ==BORRA UN EVENTO----------------------------------------------------------------------------
+//5. EVENTOS.DELETE ==BORRA UN EVENTO--------------------------------------------------------------------
 exports.borrarEvento = (idEvento) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -95,7 +95,7 @@ exports.borrarEvento = (idEvento) => {
             const result = await connection.query(sql);
             resolve(result)
         } catch (error) {
-            console.log(error)
+            //  console.log(error)
             reject(error)
         }
     })
@@ -131,16 +131,16 @@ exports.filtrarEventos = ({ id = null, nombreEvento = null, fk_concellos = null,
         try {
             const result = await connection.query(sql);
             resolve(result)
-            console.log(`Respuesta recibida desde la bbdd. EventosModel ${JSON.stringify(result)}`)
+            //  console.log(`Respuesta recibida desde la bbdd. EventosModel ${JSON.stringify(result)}`)
         } catch (error) {
-            console.log(error)
+            //   console.log(error)
             reject(error)
         }
     })
 
 }
 
-//7. DEVUELVE TODOS LOS EVENTOS CON FECHA IGUAL O SUPERIOR A HOY
+//7. DEVUELVE TODOS LOS EVENTOS CON FECHA IGUAL O SUPERIOR A HOY------------------------------------------
 exports.obtenerTodosEventosAct = () => {
 
     return new Promise(async (resolve, reject) => {
@@ -155,7 +155,7 @@ exports.obtenerTodosEventosAct = () => {
 
 }
 
-//8. DEVUELVE TODOS LOS EVENTOS CON FECHA IGUAL A HOY
+//8. DEVUELVE TODOS LOS EVENTOS CON FECHA IGUAL A HOY------------------------------------------------------
 exports.obtenerTodosEventosToday = () => {
 
     return new Promise(async (resolve, reject) => {

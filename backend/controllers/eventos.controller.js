@@ -3,7 +3,7 @@
 const eventosModel = require('../models/eventos.model');
 const { validationResult } = require('express-validator');
 
-//1.EVENTOS.POST ==CREAR NUEVO EVENTO----------------------------------------------------------------------------
+//1.EVENTOS.POST ==CREAR NUEVO EVENTO---------------------------------------------------------------------
 exports.crearEvento = async (req, res) => {
 
     //LLAMAMOS AL MODELO PARA CREAR UN NUEVO EVENTO
@@ -11,7 +11,7 @@ exports.crearEvento = async (req, res) => {
     try {
 
         const errors = validationResult(req);
-        console.log(`Errores de validación del Body ${errors}`)
+        //console.log(`Errores de validación del Body ${errors}`)
         if (errors.isEmpty()) {
 
             //SACAMOS DEL BODY LA INFORMACIÓN
@@ -48,7 +48,7 @@ exports.crearEvento = async (req, res) => {
 
 }
 
-//2.EVENTOS.GET ==DEVUELVE TODOS LOS EVENTOS---------------------------------------------------------------------
+//2.EVENTOS.GET ==DEVUELVE TODOS LOS EVENTOS-------------------------------------------------------------
 
 exports.listaEventos = async (req, res) => {
     try {
@@ -63,7 +63,7 @@ exports.listaEventos = async (req, res) => {
     }
 }
 
-//3.EVENTOS.GET ==DEVUELVE UN EVENTO-----------------------------------------------------------------------------
+//3.EVENTOS.GET ==DEVUELVE UN EVENTO---------------------------------------------------------------------
 exports.eventById = async (req, res) => {
     try {
         //Sacar del Path param el id del evento
@@ -77,13 +77,14 @@ exports.eventById = async (req, res) => {
             res.send(eventData)
         }
     } catch (error) {
-        console.log(error)
+        //  console.log(error)
         res.send(error)
     }
 }
-//4.EVENTOS.PUT ==CAMBIA LOS DATOS DE UN EVENTO------------------------------------------------------------------
+//4.EVENTOS.PUT ==CAMBIA LOS DATOS DE UN EVENTO-----------------------------------------------------------
 
 exports.modificarEvento = async (req, res) => {
+    //console.log('Llamada realizada en Eventos controller antes de validar')
     const errors = validationResult(req)//Ejecuta las validaciones
     if (errors.isEmpty()
     ) {
@@ -106,6 +107,7 @@ exports.modificarEvento = async (req, res) => {
 
         //Llamamos al modelo
         try {
+            // console.log("Llamada realizada en EventosController")
             const result = await eventosModel.modificarEvento(id, nuevoNombreEvento, nuevoLocation1, nuevoFkConcellos, nuevoLocalizacion2, nuevoFechaIn, nuevoFechaFin, nuevoHora, nuevoArtista, nuevoDescripcion, nuevoPrezo, nuevoImagen, nuevoFkClasificacion, nuevoFkUsuario, nuevoPublicacion, nuevoDestacado);
             if (result.affectedRows > 0) {
                 res.send({ "message": "Datos de evento modificados con éxito" })
@@ -114,7 +116,7 @@ exports.modificarEvento = async (req, res) => {
             }
         }
         catch (error) {
-            console.log(error)
+            // console.log(error)
             res.send(error);
         }
     } else {
@@ -122,7 +124,7 @@ exports.modificarEvento = async (req, res) => {
     }
 }
 
-//5. EVENTOS.DELETE ==BORRA UN EVENTO----------------------------------------------------------------------------
+//5. EVENTOS.DELETE ==BORRA UN EVENTO--------------------------------------------------------------------
 exports.borrarEvento = async (req, res) => {
     //Cogemos de los path params el nombreUsuario
     const idEvento = req.params.idEvento;
@@ -147,12 +149,12 @@ exports.filtrarEventos = async (req, res) => {
 
     try {
         const errors = validationResult(req);
-        console.log(`Errores de validación del Body ${errors.array}`)
+        // console.log(`Errores de validación del Body ${errors.array}`)
         if (errors.isEmpty()) {
             const datos = req.body; {
                 const datosFiltrados = await eventosModel.filtrarEventos(datos)
                 res.send(datosFiltrados)
-                console.log(`Respuesta recibida desde EventosModel. EventosController ${JSON.stringify(datosFiltrados)}`)
+                // console.log(`Respuesta recibida desde EventosModel. EventosController ${JSON.stringify(datosFiltrados)}`)
                 if (datosFiltrados.isEmpty) {
                     res.send({ "error": "Non existen eventos para eses criterios de busca. Proba con outros" })
                 } else {
@@ -165,7 +167,7 @@ exports.filtrarEventos = async (req, res) => {
     }
 }
 
-//7. DEVUELVE TODOS LOS EVENTOS CON FECHA IGUAL O SUPERIOR A HOY
+//7. DEVUELVE TODOS LOS EVENTOS CON FECHA IGUAL O SUPERIOR A HOY------------------------------------------
 exports.listaEventosAct = async (req, res) => {
     try {
         const resultados = await eventosModel.obtenerTodosEventosAct();
@@ -173,13 +175,13 @@ exports.listaEventosAct = async (req, res) => {
         res.send(resultados)
 
     } catch (error) {
-        console.log(`Error en eventos.controller ${error}`);
+        // console.log(`Error en eventos.controller ${error}`);
         res.send(error)
 
     }
 }
 
-//8. DEVUELVE TODOS LOS EVENTOS CON FECHA IGUAL  A HOY
+//8. DEVUELVE TODOS LOS EVENTOS CON FECHA IGUAL  A HOY-----------------------------------------------------
 exports.listaEventosToday = async (req, res) => {
     try {
         const resultados = await eventosModel.obtenerTodosEventosToday();
@@ -187,7 +189,7 @@ exports.listaEventosToday = async (req, res) => {
         res.send(resultados)
 
     } catch (error) {
-        console.log(`Error en eventos.controller ${error}`);
+        // console.log(`Error en eventos.controller ${error}`);
         res.send(error)
 
     }

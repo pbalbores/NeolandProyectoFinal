@@ -1,11 +1,11 @@
 
-//*SE COMUNICA CON LA TABLA USUARIOS DE LA BASE DE DATOS---------------------------------------------------------
+//*SE COMUNICA CON LA TABLA USUARIOS DE LA BASE DE DATOS--------------------------------------------------
 //*
 const connection = require('./db.model');
 
-//------------------##-CRUD SOBRE TABLA USUARIOS-##--------------------------------------------------------------
+//------------------##-CRUD SOBRE TABLA USUARIOS-##--------------------------------------------------------
 
-//1. INSERT == CREATE NEW USER----POST---------------------------------------------------------------------------
+//1. INSERT == CREATE NEW USER----POST---------------------------------------------------------------------
 
 exports.crearUsuario = (nombreUsuario, password, email, admin) => {
     return new Promise(async (resolve, reject) => {
@@ -16,14 +16,14 @@ exports.crearUsuario = (nombreUsuario, password, email, admin) => {
             )
             resolve(result)
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             reject(error);
 
         }
     })
 }
 
-//2. GET OBTENER TODOS LOS USUARIOS---GET ALL--------------------------------------------------------------------
+//2. GET OBTENER TODOS LOS USUARIOS---GET ALL-------------------------------------------------------------
 
 exports.obtenerTodosUsuarios = () => {
 
@@ -45,13 +45,13 @@ exports.getUserById = (userId) => {
             const userData = await connection.query(`SELECT * FROM usuarios WHERE id= "${userId}"`)
             resolve(userData)
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             reject.send(error)
         }
     })
 }
 
-//4. USUARIOS.PUT ==CAMBIA LOS DATOS DE UN USUARIO --PUT---------------------------------------------------------
+//4. USUARIOS.PUT ==CAMBIA LOS DATOS DE UN USUARIO --PUT-------------------------------------------------
 
 exports.modificarUsuario = (id, nuevoNombre, nuevaPassword, nuevoEmail, nuevoAdmin) => {
     return new Promise(async (resolve, reject) => {
@@ -68,7 +68,7 @@ exports.modificarUsuario = (id, nuevoNombre, nuevaPassword, nuevoEmail, nuevoAdm
             resolve(result)
 
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             reject(error)
         }
     })
@@ -77,13 +77,13 @@ exports.modificarUsuario = (id, nuevoNombre, nuevaPassword, nuevoEmail, nuevoAdm
 exports.modificarUsuario2 = ({ id, nombreUsuario = null, password = null, email = null, admin = null }) => {
     return new Promise(async (resolve, reject) => {
 
-        //HAcemos llamada get para obtener datos 
+        //Hacemos llamada get para obtener datos 
         try {
             const datosUsuarioOld = this.getUserById(id);
-            console.log(`*************DATOS USUARIOS OLD****************${datosUsuariosOld}`)
+            // console.log(`*************DATOS USUARIOS OLD****************${datosUsuariosOld}`)
 
         } catch (error) {
-            console.log(error)
+            // console.log(error)
         }
 
         let sql = 'UPDATE usuarios SET ';
@@ -101,16 +101,16 @@ exports.modificarUsuario2 = ({ id, nombreUsuario = null, password = null, email 
         } try {
             const result = await connection.query(sql);
             resolve(result)
-            console.log(`REspuesta recibida desde la bbdd. EventosModel ${JSON.stringify(result)}`)
+            // console.log(`REspuesta recibida desde la bbdd. EventosModel ${JSON.stringify(result)}`)
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             reject(error)
         }
     })
 
 }
 
-//5. USUARIOS DELETE ==BORRA UN USUARIO--------------------------------------------------------------------------
+//5. USUARIOS DELETE ==BORRA UN USUARIO-------------------------------------------------------------------
 
 exports.borrarUsuario = (nombreUsuario) => {
     return new Promise(async (resolve, reject) => {
@@ -119,13 +119,13 @@ exports.borrarUsuario = (nombreUsuario) => {
             const result = await connection.query(sql);
             resolve(result)
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             reject(error)
         }
     })
 }
 
-//8. USUARIOS.GET ==DEVUELVE UN SOLO USUARIO FILTRANDO POR NOMBRE-GET DETAIL------------------------------------
+//8. USUARIOS.GET ==DEVUELVE UN SOLO USUARIO FILTRANDO POR NOMBRE-GET DETAIL-----------------------------
 exports.getUserByName = (userName) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -133,13 +133,13 @@ exports.getUserByName = (userName) => {
             resolve(userDatabyName)
 
         } catch (error) {
-            console.log(error)
+            //  console.log(error)
             reject.send(error)
         }
     })
 }
 
-//9.USUARIOS DELETE == BORRA USUARIO POR ID
+//9.USUARIOS DELETE == BORRA USUARIO POR ID---------------------------------------------------------------
 exports.borrarUsuarioPorId = (id) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -147,7 +147,7 @@ exports.borrarUsuarioPorId = (id) => {
             const result = await connection.query(sql);
             resolve(result)
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             reject(error)
         }
     })

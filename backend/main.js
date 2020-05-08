@@ -23,10 +23,10 @@ const middlewares = require('./middlewares/middelwares');
 const jwtcontrollers = require('./controllers/jwt.controllers');
 
 
-//Creamos servidor-----------------------------------------------------------------------------------------------
+//Creamos servidor----------------------------------------------------------------------------------------
 const server = express();
 
-//Midelwares-----------------------------------------------------------------------------------------------------
+//Midelwares-------------------------------------------------------------------------------------------------
 server.use(helmet());
 // Configurar cabeceras y cors
 server.use((req, res, next) => {
@@ -34,12 +34,12 @@ server.use((req, res, next) => {
     next();
 })
 
-//Permite que el FrontEnd realice llamadas POST y PUT
+//Permite que el FrontEnd realice llamadas POST y PUT------------------------------------------------------
 server.use(bodyParser.json());
 /*server.use(bodyParser.urlencoded({
     extended: true
 }));*/
-//PErmiter realizar llamadas desde Angular
+//Permite realizar llamadas desde Angular-----------------------------------------------------------------
 server.use(cookieParser());
 //server.use(jwtcontrollers.checkToken);
 server.use(cors({
@@ -49,14 +49,14 @@ server.use(cors({
 
 
 
-//Creamos servidor estático-------------------------------------------------.------------------------------------
+//Creamos servidor estático----------------------------------------------------------------------------
 server.use(express.static('static'))
 
 //***********************************************************************************************************
 
-//-------------**-ENDPOINTS-**-----------------------------------------------------------------------------------
+//-------------**-ENDPOINTS-**-------------------------------------------------------------------------------
 
-//Comprobamos que el servidor funciona---------------------------------------------------------------------------
+//Comprobamos que el servidor funciona--------------------------------------------------------------------
 server.get("/test", (req, res) => {
     res.send("Parabéns. Servidor funcionando. De momento non peta. Moi bien!");
 });
@@ -70,13 +70,13 @@ server.post('/users/new', [
     check('email').isEmail().escape().trim()]
     , usersController.nuevoUsuario)
 
-//2. USUARIOS.GET ==DEVUELVE TODOS LOS USUARIOS--GET ALL---------------------------------------------------------
+//2. USUARIOS.GET ==DEVUELVE TODOS LOS USUARIOS--GET ALL--------------------------------------------------
 server.get('/users/all', usersController.listaUsuarios)
 
-//3. USUARIOS.GET ==DEVUELVE UN SOLO USUARIO--GET DETAIL---------------------------------------------------------
+//3. USUARIOS.GET ==DEVUELVE UN SOLO USUARIO--GET DETAIL--------------------------------------------------
 server.get('/users/:id', usersController.getUsuarioById)
 
-//4. USUARIOS.PUT ==CAMBIA LOS DATOS DE UN USUARIO --PUT---------------------------------------------------------
+//4. USUARIOS.PUT ==CAMBIA LOS DATOS DE UN USUARIO --PUT--------------------------------------------------
 
 server.put('/users/change', [
     check('nombreUsuario').isString().escape().trim(),
@@ -85,21 +85,21 @@ server.put('/users/change', [
     check('admin').isNumeric().escape().trim()]
     , usersController.modificarUsuario)
 
-//5. USUARIOS DELETE ==BORRA UN USUARIO--------------------------------------------------------------------------
+//5. USUARIOS DELETE ==BORRA UN USUARIO--------------------------------------------------------------------
 server.delete('/users/delete/:nombreUsuario', usersController.borrarUsuario);
 
-//6. USUARIOS LOGIN ==PRUEBA QUE EL USUARIO Y LA CONTRASEÑA COINCIDEN ------------------------------------------
+//6. USUARIOS LOGIN ==PRUEBA QUE EL USUARIO Y LA CONTRASEÑA COINCIDEN -----------------------------------
 server.post('/users/login', [
     check('nombreUsuario').isString().escape().trim(),
     check('password').isString().escape().trim()], usersController.usersLogin);
 
-//7. RECUPERAR CONTRASEÑA ==COMPROBAMOS QUE USUARIO Y EMAIL COINCIDEN--------------------------------------------
+//7. RECUPERAR CONTRASEÑA ==COMPROBAMOS QUE USUARIO Y EMAIL COINCIDEN--------------------------------------
 server.post('/users/recovery', [
     check('nombreUsuario').isString().escape().trim(),
     check('email').isEmail().escape().trim(),
 ], usersController.usersPasswordRecover);
 
-//8. USUARIOS.GET ==DEVUELVE UN SOLO USUARIO FILTRANDO POR NOMBRE-GET DETAIL------------------------------------
+//8. USUARIOS.GET ==DEVUELVE UN SOLO USUARIO FILTRANDO POR NOMBRE-GET DETAIL------------------------------
 server.get('/users/get/:nombreUsuario', usersController.getUsuarioByName)
 
 //9.USUARIOS DELETE == BORRA USUARIO POR ID
@@ -108,7 +108,7 @@ server.delete('/users/delete/user/:id', usersController.borrarUsuarioPorID);
 
 //-----------------##-TABLA EVENTOS-##-----------------------------------------------------------------
 
-//1.EVENTOS.POST ==CREAR NUEVO EVENTO----------------------------------------------------------------------------
+//1.EVENTOS.POST ==CREAR NUEVO EVENTO---------------------------------------------------------------------
 server.post('/eventos/new', [
     check('nombreEvento').not().isEmpty().isString().escape().trim(),
     check('location1').optional().isString().escape().trim(),
@@ -127,13 +127,13 @@ server.post('/eventos/new', [
 ], //middlewares.checkToken, 
     eventosController.crearEvento);
 
-//2.EVENTOS.GET ==DEVUELVE TODOS LOS EVENTOS---------------------------------------------------------------------
+//2.EVENTOS.GET ==DEVUELVE TODOS LOS EVENTOS---------------------------------------------------------------
 server.get('/eventos/all', eventosController.listaEventos);
 
-//3.EVENTOS.GET ==DEVUELVE UN EVENTO-----------------------------------------------------------------------------
+//3.EVENTOS.GET ==DEVUELVE UN EVENTO----------------------------------------------------------------------
 server.get('/eventos/:id', eventosController.eventById);
 
-//4.EVENTOS.PUT ==CAMBIA LOS DATOS DE UN EVENTO------------------------------------------------------------------
+//4.EVENTOS.PUT ==CAMBIA LOS DATOS DE UN EVENTO----------------------------------------------------------
 //Sin implementar la validación del Body
 server.put('/eventos/change', [check('nombreEvento').not().isEmpty().isString().escape().trim(),
 check('location1').optional().isString().escape().trim(),
@@ -168,29 +168,29 @@ server.get('/eventos/all/today', eventosController.listaEventosToday);
 
 //-----------------##-TABLA CONCELLOS-##------------------------------------------------------------------
 
-//1. DEVUELVE TODOS LOS CONCELLOS
+//1. DEVUELVE TODOS LOS CONCELLOS-------------------------------------------------------------------------
 server.get('/concellos/all', concellosController.listaConcellos);
 
-//2. DEVUELVE UN CONCELLO POR ID
+//2. DEVUELVE UN CONCELLO POR ID---------------------------------------------------------------------------
 server.get('/concellos/:id', concellosController.getConcelloById);
-//-----------------##-TABLA CATEGORÍAS-##---------------------------------------------------------------------
+//-----------------##-TABLA CATEGORÍAS-##-----------------------------------------------------------
 
-//1.DEVUELVE TODAS LAS CATEGORÍAS
+//1.DEVUELVE TODAS LAS CATEGORÍAS-------------------------------------------------------------------------
 server.get('/categorias/all', categoriasController.listaCategorias);
 
-//2. DEVUELVE UN CONCELLO POR ID
+//2. DEVUELVE UN CONCELLO POR ID--------------------------------------------------------------------------
 server.get('/categorias/:id', categoriasController.getCategoriaById);
 
-//************************************************************************************************************** 
+//******************************************************************************************************* 
 
-//-----------------##-LISTEN-##----------------------------------------------------------------------------------
+//-----------------##-LISTEN-##------------------------------------------------------------------------------
 
-//Definimos puerto de servidor-----------------------------------------------------------------------------------
+//Definimos puerto de servidor-----------------------------------------------------------------------------
 const PORT = process.env.PORT
 //const PORT = 3000;
 //Para arrancar servidor== SET PORT=3000 && nodemon main.js
 
-//Ponemos servidor a escuchar------------------------------------------------------------------------------------
+//Ponemos servidor a escuchar-----------------------------------------------------------------------------
 server.listen(PORT, () => {
     console.log(`Servidor escuchando en el puerto ${PORT}`);
 });

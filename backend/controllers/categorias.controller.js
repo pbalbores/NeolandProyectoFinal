@@ -2,7 +2,7 @@ const categoriasModel = require('../models/categorias.model');
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
 
-//1. GET ALL--OBTENEMOS DATOS DE TODAS LAS CATEGORÍAS------------------------------------------------------------
+//1. GET ALL--OBTENEMOS DATOS DE TODAS LAS CATEGORÍAS----------------------------------------------------
 
 exports.listaCategorias = async (req, res) => {
     try {
@@ -17,7 +17,7 @@ exports.listaCategorias = async (req, res) => {
     }
 }
 
-//2. GET BY ID. DEVUELVE DATOS DE CATEGORÍA POR ID---------------------------------------------------------------
+//2. GET BY ID. DEVUELVE DATOS DE CATEGORÍA POR ID-------------------------------------------------------
 exports.getCategoriaById = async (req, res) => {
     try {
         //Sacar del Path param el nombre del usuario
