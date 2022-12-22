@@ -20,7 +20,7 @@
     "express-fileupload": "^1.1.7-alpha.3",
     "express-validator": "^6.4.0",
     "helmet": "^3.22.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "moments": "0.0.2",
     "mysql": "^2.18.1"
   }
